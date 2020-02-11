@@ -7,16 +7,18 @@ constructor(props)
 {
     super(props);
     this.state = {
-        create_by: null,
-        picture_dir: null,
-        picture_id: null,
-        error: 0
+        picture_info:{
+            create_by: null,
+            picture_dir: null,
+            picture_id: null,
+            error: 0
+        }
     }
 }
 
 componentDidMount()
 {
-    Axios.get('http://localhost/api/getpicture.php?pictureid=1')//+this.props.pid)
+    Axios.get('http://localhost/api/getpicture.php?pictureid=1')
     .then((response) => {
         this.setState({
             picture_info: response.data

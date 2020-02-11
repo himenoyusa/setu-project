@@ -26,7 +26,7 @@ export default class Gallary extends Component {
     return (
         <div id="gallary" className="d-flex flex-wrap justify-content-around">
             <div>
-                <img className="card" src={require("./../404.png")}  data-toggle="modal" data-target="#single" alt=""/>
+                <img className="card" src={require("./../404.png")}  data-toggle="modal" data-target="#single" alt="1"/>
                 <span className="tag">{this.state.yusa}</span>
             </div>
             <div>
