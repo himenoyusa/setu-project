@@ -16,7 +16,7 @@ constructor(props)
     }
 }
 
-componentDidMount()
+/*componentDidMount()
 {
     Axios.get('http://localhost/api/getpicture.php?pictureid=1')
     .then((response) => {
@@ -27,7 +27,7 @@ componentDidMount()
     .catch(() => {
         this.setState({error: 1});
     });
-}
+}*/
 
 //图片读取失败时，显示 404 图片
 renderPicture ()
@@ -38,7 +38,8 @@ renderPicture ()
         )
     } else {
         return(
-            <img className="card" src={this.state.picture_info.picture_dir} alt="" />
+            //<img className="card" src={this.state.picture_info.picture_dir} alt="" />
+            <img className="card" src={this.props.src} alt="" />
         )
     }
 }

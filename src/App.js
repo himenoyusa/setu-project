@@ -15,7 +15,7 @@ function App() {
           </div>
       </header>
       <Login />
-      <SinglePicture pid="1"/>
+      {/*<SinglePicture pid="1"/>*/}
 
       <div id="content" className="container">
         <Picturebox />
