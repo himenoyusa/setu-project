@@ -1,0 +1,19 @@
+INSERT INTO `setu`.`pictures` (
+    create_by,
+    create_time,
+    edit_by,
+    edit_time,
+    picture_dir,
+    picture_id,
+    thumb_dir
+  )
+VALUES
+  (
+    1,
+    1,
+    1,
+    1,
+    '/home/yusa/Pictures/IMG_0184.PNG',
+    1,
+    '/home/yusa/Pictures/IMG_0184.PNG'
+  );

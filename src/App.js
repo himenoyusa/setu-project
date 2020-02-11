@@ -4,7 +4,7 @@ import './App.css';
 import Picturebox from './picturebox/picturebox';
 import Gallary from './gallary/gallary';
 import Login from './login/login';
-import Single from './singlepicture/single';
+import SinglePicture from './singlepicture/single';
 
 function App() {
   return (
@@ -15,7 +15,7 @@ function App() {
           </div>
       </header>
       <Login />
-      <Single />
+      <SinglePicture pid="1"/>
 
       <div id="content" className="container">
         <Picturebox />

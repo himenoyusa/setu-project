@@ -1,17 +1,7 @@
 import React, { Component } from 'react';
 import Axios from 'axios';
 
-/*var xmlhttp = new XMLHttpRequest();
-xmlhttp.open("GET", "http://localhost/gallary.php", true);
-xmlhttp.send();
-var picture_count = xmlhttp.responseText;*/
-//var result = JSON.parse(xmlhttp.responseText);
-//var picture_count = result.picture_count;
-
-
-
-
-class Gallary extends Component {
+export default class Gallary extends Component {
     constructor(props)
     {
         super(props);
@@ -22,25 +12,14 @@ class Gallary extends Component {
     
 
     componentDidMount() {
-        Axios('http://localhost/getcount.php')
+        Axios('api/getcount.php')
         .then((response) => {
-            console.log(response);
+            this.setState({yusa: response.data.name});
         })
         .catch((error) => {
-            console.log(error);
+            alert(error);
         });
 
-        /*const _this = this;
-        var xml = new XMLHttpRequest();
-        xml.open('get', 'http://localhost/getcount.php', true);
-        xml.onreadystatechange = function(){
-            if (xml.readyState == 4 && xml.status == 200) {
-                _this.setState({yusa: JSON.parse(xml.responseText).name});
-            }
-            _this.setState({yusa: JSON.parse(xml.responseText).name});
-        }
-
-        xml.send();*/
     }
 
     render() {
@@ -70,4 +49,3 @@ class Gallary extends Component {
     );
     }
 }
-export default Gallary;
