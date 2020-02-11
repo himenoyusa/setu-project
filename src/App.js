@@ -3,8 +3,8 @@ import React from "react";
 import "./App.css";
 
 import Gallary from "./gallary/gallary";
+import PictureBox from "./picturebox/picturebox";
 import Login from "./login/login";
-import SinglePicture from "./singlepicture/single";
 
 function App() {
   return (
@@ -21,9 +21,9 @@ function App() {
         </div>
       </header>
       <Login />
-      <SinglePicture pid="1" />
 
       <div id="content" className="container">
+        <PictureBox />
         <div id="bar">
           <div className="dropdown">
             <a

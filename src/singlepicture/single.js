@@ -1,44 +1,15 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
-import Axios from "axios";
 
-export default class SinglePicture extends Component {
-  propTypes = {
+export default class SinglePicture extends PureComponent {
+  static propTypes = {
     picture: PropTypes.object.isRequired
   };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      picture_info: {
-        create_by: null,
-        picture_dir: null,
-        picture_id: null,
-        error: 0
-      }
-    };
-  }
-
-  componentDidMount() {
-    // Axios.get("http://localhost/api/getpicture.php?pictureid=1")
-    //   .then(response => {
-    //     this.setState({
-    //       picture_info: response.data
-    //     });
-    //   })
-    //   .catch(() => {
-    //     this.setState({ error: 1 });
-    //   });
-  }
-
   //图片读取失败时，显示 404 图片
-  renderPicture() {
-    const { picture: { picture_dir = "../404.png" } = {} } = this.props;
-    console.log("picture_dir", picture_dir);
+  renderPicture = () => {
+    const { picture: { picture_dir = "../favicon.png" } = {} } = this.props;
 
-    // if (this.state.error == 1) {
-    //   return <img className="card" src={require("../../src/404.png")} alt="" />;
-    // } else {
     return (
       <img
         className="card"
@@ -47,11 +18,9 @@ export default class SinglePicture extends Component {
         alt=""
       />
     );
-    // }
-  }
+  };
 
   render() {
-    console.log("render");
     return (
       <div
         className="modal fade"

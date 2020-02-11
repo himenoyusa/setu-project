@@ -12,20 +12,22 @@ export default class Gallary extends Component {
   }
 
   componentDidMount() {
-    // Axios("api/getcount.php")
-    //   .then(response => {
-    //     this.setState({ yusa: response.data.name });
-    //   })
-    //   .catch(error => {
-    //     alert(error);
-    //   });
+    Axios("api/getcount.php")
+      .then(response => {
+        this.setState({ yusa: response.data.name });
+      })
+      .catch(error => {
+        // alert(error);
+      });
 
     this.setState({
       pictureList: [
         {
+          id: 1,
           picture_dir: "../favicon.png"
         },
         {
+          id: 2,
           picture_dir: require("../404.png")
         }
       ]
@@ -33,15 +35,13 @@ export default class Gallary extends Component {
   }
 
   handleClick = item => {
-    console.log("item :", item);
     this.setState({
       currentPicture: item
     });
   };
 
   render() {
-    const { currentPicture, pictureList = [] } = this.state;
-    console.log("currentPicture", currentPicture);
+    const { currentPicture = {}, pictureList = [] } = this.state;
 
     return (
       <div id="gallary" className="d-flex flex-wrap justify-content-around">
