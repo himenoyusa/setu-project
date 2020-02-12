@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Axios from "axios";
+import instance from "../instance";
 import Single from "../singlepicture/single";
 
 export default class Gallary extends Component {
@@ -12,7 +13,7 @@ export default class Gallary extends Component {
   }
 
   componentDidMount() {
-    Axios("api/getcount.php")
+    Axios(instance+"api/getcount.php")
       .then(response => {
         this.setState({ yusa: response.data.name });
       })
