@@ -38,14 +38,14 @@ header {
         margin: 5px;
     }
 
-#gallary {
+#gallery {
     margin-bottom: 15px;
 }
-    #gallary+div {
+    #gallery+div {
         width: 180px;
         margin: 5px;
     }
-    #gallary img {
+    #gallery img {
         padding: 5px;
         margin: 10px;
         height: 180px;

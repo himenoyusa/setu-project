@@ -1,23 +1,21 @@
 import React, { PureComponent } from "react";
-import instance from '../instance';
+//import instance from '../instance';
 import Moment from 'moment';
+import _ from 'lodash';
 import PropTypes from "prop-types";
 
-export default class SinglePicture extends PureComponent {
+export default class SinglePicture extends PureComponent
+{
+
   static propTypes = {
     picture: PropTypes.object.isRequired
   };
 
-  /*renderPicture = () => {
-    
-//    const { picture: { picture_dir = "../favicon.png" } = {} } = this.props;
-
-    return (
-      
-    );
-  };*/
-
   render() {
+    if(_.isEmpty(this.props.picture)) {
+      return (<div></div>);
+    }
+
     const {
       pic_info, pic_info: {
         picture_id,
@@ -30,7 +28,7 @@ export default class SinglePicture extends PureComponent {
       <div
         className="modal fade"
         id="single"
-        tabindex="-1"
+        tabIndex="-1"
         role="dialog"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
@@ -40,7 +38,6 @@ export default class SinglePicture extends PureComponent {
             <div className="modal-header">
               <h5 className="modal-title" id="exampleModalLabel">
                 { Moment(1512334566).format('YYYY-MM-DD') }
-                { console.log(this.props.picture) }
               </h5>
               <button
                 type="button"

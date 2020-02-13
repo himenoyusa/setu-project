@@ -1,8 +1,5 @@
 import React from "react";
-//import logo from './favicon.png';
-import "./App.css";
-
-import Gallary from "./gallary/gallary";
+import Gallery from "./gallery/gallery";
 import PictureBox from "./picturebox/picturebox";
 import Login from "./login/login";
 
@@ -28,7 +25,7 @@ function App() {
           <div className="dropdown">
             <a
               className="btn btn-primary btn-sm dropdown-toggle"
-              href="#"
+              href="#root"
               role="button"
               id="dropdownMenuLink"
               data-toggle="dropdown"
@@ -53,7 +50,7 @@ function App() {
             </div>
           </div>
         </div>
-        <Gallary />
+        <Gallery />
 
         <ul className="pagination justify-content-center">
           <li className="page-item">

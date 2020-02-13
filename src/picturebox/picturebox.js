@@ -14,13 +14,13 @@ export default function Picturebox() {
             {/* 轮播图片 */}
             <div className="carousel-inner">
                 <div className="carousel-item active">
-                    <img src={require("./../favicon.png")}  data-toggle="modal" data-target="#single" />
+                    <img src={require("../favicon.png")}  data-toggle="modal" data-target="#single" alt="1"/>
                 </div>
                 <div className="carousel-item">
-                    <img src={require("./../404.png")}  data-toggle="modal" data-target="#single" />
+                    <img src={require("../404.png")}  data-toggle="modal" data-target="#single" alt="2"/>
                 </div>
                 <div className="carousel-item">
-                    <img src={require("./../logo.png")}  data-toggle="modal" data-target="#single" />
+                    <img src={require("../logo.png")}  data-toggle="modal" data-target="#single" alt="2"/>
                 </div>
             </div>
 

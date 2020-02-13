@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import instance from "../instance";
 import Single from "../singlepicture/single";
 
-export default class Gallary extends Component {
+export default class Gallery extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -27,9 +27,9 @@ export default class Gallary extends Component {
   //点击图片时获取图片信息，并通过 props 传递给 single 页面
   handleClick = item => {
     instance('api/getpicture.php?pictureid=' + item.picture_id)
-    .then(responce => {
+    .then(response => {
       this.setState({
-        currentPicture: responce.data
+        currentPicture: response.data
       });
     })
     .catch(error => {
@@ -41,7 +41,7 @@ export default class Gallary extends Component {
     const { currentPicture = {}, pictureList = [] } = this.state;
 
     return (
-      <div id="gallary" className="d-flex flex-wrap justify-content-around">
+      <div id="gallery" className="d-flex flex-wrap justify-content-around">
         {pictureList.map(item => (
           <div onClick={() => this.handleClick(item)}>
             <img
