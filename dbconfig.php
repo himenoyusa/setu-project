@@ -1,3 +1,3 @@
 <?php
-$username = 'root';
-$passwd = 'password';
+$username = 'yusa';
+$passwd = '7418035';
