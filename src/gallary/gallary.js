@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Axios from "axios";
 import instance from "../instance";
 import Single from "../singlepicture/single";
 
@@ -7,37 +6,27 @@ export default class Gallary extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      yusa: 1,
-      currentPicture: {}
+      currentPicture: {},
+      pictureList: [],
+      currentPage: 1
     };
   }
 
   componentDidMount() {
-    Axios(instance+"api/getcount.php")
+    instance("api/getthumbs.php?page="+this.state.currentPage)
       .then(response => {
-        this.setState({ yusa: response.data.name });
+        this.setState({
+          pictureList: response.data.thumbs
+        });
       })
       .catch(error => {
         // alert(error);
       });
-
-    this.setState({
-      pictureList: [
-        {
-          id: 1,
-          picture_dir: "../favicon.png"
-        },
-        {
-          id: 2,
-          picture_dir: require("../404.png")
-        }
-      ]
-    });
   }
 
   handleClick = item => {
     this.setState({
-      currentPicture: item
+      currentPicture: item.picture_id
     });
   };
 
@@ -50,16 +39,16 @@ export default class Gallary extends Component {
           <div onClick={() => this.handleClick(item)}>
             <img
               className="card"
-              src={item.picture_dir}
+              src={item.thumb_dir}
               data-toggle="modal"
               data-target="#single"
-              alt="1"
+              alt={item.total_score}
             />
-            <span className="tag">{this.state.yusa}</span>
+            <span className="tag">{item.total_score}</span>
           </div>
         ))}
 
-        <Single picture={currentPicture} />
+        <Single pictureid={currentPicture} />
       </div>
     );
   }

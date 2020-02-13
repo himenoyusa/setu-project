@@ -14,7 +14,7 @@ if ($page <= 0) {
     error(404);
     exit();
 } else {
-    $pid = (($page-1)*$page_count);
+    $pid = ($page - 1) * $page_count;
 }
 
 //查询 redis 缓存，若缓存不命中，则读取数据库并更新缓存
@@ -33,10 +33,6 @@ if ($thumbs == null) {
     //设置缓存
     redis('set', 'page'.$page, $thumbs);
 }
-
-//------------------------------------
-//查询图片总分数
-//$score = redis('get', 'score'.$pid);
 
 responce([
     'thumbs' => $thumbs
