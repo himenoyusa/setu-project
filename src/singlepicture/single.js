@@ -1,4 +1,6 @@
 import React, { PureComponent } from "react";
+import instance from '../instance';
+import Moment from 'moment';
 import PropTypes from "prop-types";
 
 export default class SinglePicture extends PureComponent {
@@ -6,21 +8,24 @@ export default class SinglePicture extends PureComponent {
     picture: PropTypes.object.isRequired
   };
 
-  //图片读取失败时，显示 404 图片
-  renderPicture = () => {
-    const { picture: { picture_dir = "../favicon.png" } = {} } = this.props;
+  /*renderPicture = () => {
+    
+//    const { picture: { picture_dir = "../favicon.png" } = {} } = this.props;
 
     return (
-      <img
-        className="card"
-        style={{ width: 400, height: 400 }}
-        src={picture_dir}
-        alt=""
-      />
+      
     );
-  };
+  };*/
 
   render() {
+    const {
+      pic_info, pic_info: {
+        picture_id,
+        picture_dir,
+        create_time
+      } = {},
+      tags, tags: [] = []
+    } = this.props.picture;
     return (
       <div
         className="modal fade"
@@ -34,7 +39,8 @@ export default class SinglePicture extends PureComponent {
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="exampleModalLabel">
-                示例图片
+                { Moment(1512334566).format('YYYY-MM-DD') }
+                { console.log(this.props.picture) }
               </h5>
               <button
                 type="button"
@@ -45,8 +51,14 @@ export default class SinglePicture extends PureComponent {
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div className="modal-body">{this.renderPicture()}</div>
-
+            <div className="modal-body">
+              <img
+                className="card"
+                style={{ maxWidth: 1000 }}
+                src={ picture_dir }
+                alt=""
+              />
+            </div>
             <div>
               <h3>评分：7.5</h3>
             </div>

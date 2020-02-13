@@ -16,7 +16,7 @@ CREATE TABLE `pictures` (
     picture_id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     picture_dir VARCHAR(200) NOT NULL,
     thumb_dir VARCHAR(200) NOT NULL,
-    total_score TINYINT UNSIGNED DEFAULT 0;
+    total_score TINYINT UNSIGNED DEFAULT 0,
     create_by INT UNSIGNED NOT NULL,
     create_time INT(10) NOT NULL,
     edit_by INT UNSIGNED NOT NULL,

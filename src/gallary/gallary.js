@@ -24,9 +24,16 @@ export default class Gallary extends Component {
       });
   }
 
+  //点击图片时获取图片信息，并通过 props 传递给 single 页面
   handleClick = item => {
-    this.setState({
-      currentPicture: item.picture_id
+    instance('api/getpicture.php?pictureid=' + item.picture_id)
+    .then(responce => {
+      this.setState({
+        currentPicture: responce.data
+      });
+    })
+    .catch(error => {
+      //
     });
   };
 
@@ -48,7 +55,7 @@ export default class Gallary extends Component {
           </div>
         ))}
 
-        <Single pictureid={currentPicture} />
+        <Single picture={currentPicture} />
       </div>
     );
   }
