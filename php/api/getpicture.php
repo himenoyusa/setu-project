@@ -42,5 +42,5 @@ if ($pic_info == null) {
 
 responce([
     'pic_info' => $pic_info,
-    'tags' => $tags
+    'tags' => $tags ? $tags : []
 ]);

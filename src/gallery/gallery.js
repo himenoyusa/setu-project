@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import instance from "../instance";
+import _ from 'lodash';
 import Single from "../singlepicture/single";
 
 export default class Gallery extends Component {
@@ -10,6 +11,7 @@ export default class Gallery extends Component {
       pictureList: [],
       currentPage: 1
     };
+    this.handleClick.bind(this);
   }
 
   componentDidMount() {
@@ -37,8 +39,20 @@ export default class Gallery extends Component {
     });
   };
 
+  //预先渲染默认弹窗，点击触发时更新弹窗数据
+  renderSinglePicture ()
+  {
+    const { currentPicture } = this.state;
+    if (!_.isEmpty(this.state.currentPicture)) {
+      return (<Single picture={ currentPicture } />);
+    } else {
+      return <Single />;
+    }
+    
+  }
+
   render() {
-    const { currentPicture = {}, pictureList = [] } = this.state;
+    const { pictureList = [] } = this.state;
 
     return (
       <div id="gallery" className="d-flex flex-wrap justify-content-around">
@@ -54,8 +68,7 @@ export default class Gallery extends Component {
             <span className="tag">{item.total_score}</span>
           </div>
         ))}
-
-        <Single picture={currentPicture} />
+        { this.renderSinglePicture() }
       </div>
     );
   }
