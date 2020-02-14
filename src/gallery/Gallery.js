@@ -1,7 +1,8 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import instance from "../instance";
 import _ from 'lodash';
-import Single from "../singlepicture/single";
+import OrderType from "./OrderType";
+import SinglePicture from "./SinglePicture";
 
 export default class Gallery extends Component {
   constructor(props) {
@@ -44,9 +45,9 @@ export default class Gallery extends Component {
   {
     const { currentPicture } = this.state;
     if (!_.isEmpty(this.state.currentPicture)) {
-      return (<Single picture={ currentPicture } />);
+      return (<SinglePicture picture={ currentPicture } />);
     } else {
-      return <Single />;
+      return <SinglePicture />;
     }
     
   }
@@ -55,6 +56,7 @@ export default class Gallery extends Component {
     const { pictureList = [] } = this.state;
 
     return (
+      <Fragment>
       <div id="gallery" className="d-flex flex-wrap justify-content-around">
         {pictureList.map(item => (
           <div onClick={() => this.handleClick(item)}>
@@ -70,6 +72,8 @@ export default class Gallery extends Component {
         ))}
         { this.renderSinglePicture() }
       </div>
+      <OrderType />
+      </Fragment>
     );
   }
 }

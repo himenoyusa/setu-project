@@ -3,15 +3,13 @@ import React, { PureComponent } from "react";
 import Moment from 'moment';
 import PropTypes from "prop-types";
 
-class SinglePicture extends PureComponent
-{
+export default class SinglePicture extends PureComponent {
 
   static propTypes = {
     picture: PropTypes.object.isRequired
   };
 
-  constructor(props)
-  {
+  constructor(props) {
     super(props);
     this.state = {
 
@@ -20,7 +18,7 @@ class SinglePicture extends PureComponent
 
   render() {
     const {
-      pic_info, pic_info: {} = {},
+      pic_info, pic_info: { } = {},
       tags, tags: [] = []
     } = this.props.picture;
     return (
@@ -36,7 +34,7 @@ class SinglePicture extends PureComponent
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title" id="exampleModalLabel">
-                投稿时间：{ Moment(Number(pic_info.create_time + '000')).format('YYYY-MM-DD') }
+                投稿时间：{Moment(Number(pic_info.create_time + '000')).format('YYYY-MM-DD')}
               </h5>
               <button
                 type="button"
@@ -51,15 +49,17 @@ class SinglePicture extends PureComponent
               <img
                 className="card"
                 style={{ maxWidth: 1000 }}
-                src={ pic_info.picture_dir }
+                src={pic_info.picture_dir}
                 alt=""
               />
             </div>
             <div>
-              <h3>分数：{ pic_info.total_score }</h3>
+              <h3>分数：{pic_info.total_score}</h3>
             </div>
-            <div>
-              { tags.map(tag => (tag.tag)) }
+            <div className="">
+              {tags.map(tag => (
+                <span className="badge badge-primary">{tag.tag}</span>
+              ))}
             </div>
             <div className="modal-footer">
               <button
@@ -74,7 +74,7 @@ class SinglePicture extends PureComponent
         </div>
       </div>
     );
-    
+
   }
 }
 
@@ -85,5 +85,3 @@ SinglePicture.defaultProps = {
     tags: []
   }
 };
-
-export default SinglePicture;
