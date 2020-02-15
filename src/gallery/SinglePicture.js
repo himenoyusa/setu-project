@@ -1,40 +1,42 @@
 import React, { PureComponent } from "react";
 //import instance from '../instance';
-import Moment from 'moment';
+import Moment from "moment";
 import PropTypes from "prop-types";
-import { Modal, Tag } from 'antd';
+import { Modal, Tag } from "antd";
 
 export default class SinglePicture extends PureComponent {
-
   static propTypes = {
-    picture: PropTypes.object.isRequired
+    picture: PropTypes.object.isRequired,
+    hideModal: PropTypes.func.isRequired
   };
 
   constructor(props) {
     super(props);
-    this.state = {
-      
-    };
+    this.state = {};
   }
 
   handleOK = () => {
     this.props.hideModal();
-  }
+  };
 
   handleCancel = () => {
     this.props.hideModal();
-  }
-
+  };
 
   render() {
     const {
-      pic_info, pic_info: { } = {},
-      tags, tags: [] = []
+      pic_info,
+      pic_info: {} = {},
+      tags,
+      tags: [] = []
     } = this.props.picture;
     return (
       <Modal
-        title={'投稿时间：' + Moment(Number(pic_info.create_time + '000')).format('YYYY-MM-DD') }
-        visible={this.props.visible}
+        title={
+          "投稿时间：" +
+          Moment(Number(pic_info.create_time + "000")).format("YYYY-MM-DD")
+        }
+        visible
         onOk={this.handleOk}
         onCancel={this.handleCancel}
       >
@@ -55,14 +57,5 @@ export default class SinglePicture extends PureComponent {
         </div>
       </Modal>
     );
-
   }
 }
-
-//图片未点击时，先渲染空弹窗
-SinglePicture.defaultProps = {
-  picture: {
-    pic_info: {},
-    tags: []
-  }
-};
