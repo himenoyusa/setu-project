@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from "react";
 import instance from "../instance";
-import { isEmpty } from "lodash";
 import { Card } from "antd";
 import SinglePicture from "./SinglePicture";
 import NavBar from "./navBar/NavBar";
@@ -32,7 +31,7 @@ export default class Gallery extends Component {
 
   //点击图片时获取图片信息，并通过 props 传递给 single 页面
   handleClick = item => {
-    instance('api/getpicture.php?pictureid=' + item.picture_id)
+    instance("api/getpicture.php?pictureid=" + item.picture_id)
       .then(response => {
         this.setState({
           currentPicture: response.data,
@@ -48,33 +47,22 @@ export default class Gallery extends Component {
   hideModal() {
     this.setState({
       visible: false
-    })
+    });
   }
 
   renderModal() {
     const { currentPicture } = this.state;
     const { visible } = this.state;
-    if (isEmpty(currentPicture)) {
+
+    if (visible) {
       return (
-        <SinglePicture 
-          hideModal={ this.hideModal }
-          visible={ visible }
-        />
-      )
-    } else {
-      return (
-        <SinglePicture 
-          picture={currentPicture}
-          hideModal={this.hideModal}
-          visible={ visible }
-        />
-      )
+        <SinglePicture picture={currentPicture} hideModal={this.hideModal} />
+      );
     }
   }
 
   render() {
     const { pictureList = [] } = this.state;
-    const { currentPicture } = this.state;
 
     return (
       <Fragment>
@@ -86,15 +74,11 @@ export default class Gallery extends Component {
                 style={{
                   width: 300,
                   height: 320,
-                  margin: 10,
+                  margin: 10
                 }}
                 bordered={false}
               >
-                <img
-                  height="290"
-                  src={item.thumb_dir}
-                  alt={item.total_score}
-                />
+                <img height="290" src={item.thumb_dir} alt={item.total_score} />
                 <p>评分：{item.total_score}</p>
               </Card>
             </div>
