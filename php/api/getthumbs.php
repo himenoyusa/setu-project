@@ -34,6 +34,6 @@ if ($thumbs == null) {
     redis('set', 'page'.$page, $thumbs);
 }
 
-responce([
+response([
     'thumbs' => $thumbs
 ]);

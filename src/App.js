@@ -1,12 +1,12 @@
-import React, { Fragment } from "react";
-import "antd/dist/antd.css";
-import Gallery from "./gallery/Gallery";
-import PictureBox from "./pictureBox/PictureBox";
-import LoginBar from "./loginBar/LoginBar";
+import React, { Fragment } from 'react';
+import 'antd/dist/antd.css';
+import Gallery from './gallery/Gallery';
+import PictureBox from './pictureBox/PictureBox';
+import LoginBar from './loginBar/LoginBar';
 
 export default function App() {
   return (
-    <Fragment>
+    <>
       <LoginBar />
       <PictureBox />
       <Gallery />
@@ -20,6 +20,6 @@ export default function App() {
         </div>
         <div>It's the only NEET thing to do</div>
       </footer>
-    </Fragment>
+    </>
   );
 }

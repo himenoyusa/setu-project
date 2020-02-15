@@ -1,30 +1,29 @@
 import React, { Component } from 'react';
 import { Carousel } from 'antd';
-import instance from "../instance";
+import instance from '../instance';
 
 export default class PictureBox extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      pictures: []
+      pictures: [],
     };
   }
 
   componentDidMount() {
-    //i为轮播图片数量
+    // i为轮播图片数量
     const pid = [1, 2, 3];
     for (let i = 1; i <= 3; i++) {
-      instance('api/getpicture.php?pictureid=' + pid[i - 1])
-        .then(response => {
+      instance(`api/getpicture.php?pictureid=${pid[i - 1]}`)
+        .then((response) => {
           this.setState({
-            pictures: [...this.state.pictures, response.data.pic_info]
+            pictures: [...this.state.pictures, response.data.pic_info],
           });
         })
-        .catch(error => {
+        .catch((error) => {
           //
         });
     }
-
   }
 
   render() {
@@ -35,19 +34,17 @@ export default class PictureBox extends Component {
           effect="fade"
           dotPosition="top"
           autoplay
-          >
-          {pictures.map(picture => (
+        >
+          {pictures.map((picture) => (
             <div key="picture_id">
               <img
                 src={picture.picture_dir}
                 alt={picture.total_score}
               />
             </div>
-          )
-          )}
+          ))}
         </Carousel>
       </div>
     );
   }
-
 }
