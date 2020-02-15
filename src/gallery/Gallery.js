@@ -1,9 +1,9 @@
-import React, { Component, Fragment } from "react";
-import instance from "../instance";
-import { Card } from "antd";
-import SinglePicture from "./SinglePicture";
-import NavBar from "./navBar/NavBar";
-import Paginate from "./Paginate";
+import React, { Component, Fragment } from 'react';
+import { Card } from 'antd';
+import instance from '../instance';
+import SinglePicture from './SinglePicture';
+import NavBar from './navBar/NavBar';
+import Paginate from './Paginate';
 
 export default class Gallery extends Component {
   constructor(props) {
@@ -12,40 +12,40 @@ export default class Gallery extends Component {
       currentPicture: {},
       pictureList: [],
       currentPage: 1,
-      visible: false
+      visible: false,
     };
   }
 
   componentDidMount() {
-    instance("api/getthumbs.php?page=" + this.state.currentPage)
-      .then(response => {
+    instance(`api/getthumbs.php?page=${this.state.currentPage}`)
+      .then((response) => {
         this.setState({
-          pictureList: response.data.thumbs
+          pictureList: response.data.thumbs,
         });
       })
-      .catch(error => {
+      .catch((error) => {
         // alert(error);
       });
   }
 
-  //点击图片时获取图片信息，并通过 props 传递给 single 页面
-  handleClick = item => {
-    instance("api/getpicture.php?pictureid=" + item.picture_id)
-      .then(response => {
+  // 点击图片时获取图片信息，并通过 props 传递给 single 页面
+  handleClick = (item) => {
+    instance(`api/getpicture.php?pictureid=${item.picture_id}`)
+      .then((response) => {
         this.setState({
           currentPicture: response.data,
-          visible: true
+          visible: true,
         });
       })
-      .catch(error => {
+      .catch((error) => {
         //
       });
   };
 
-  //传递给子组件控制弹窗
+  // 传递给子组件控制弹窗
   hideModal = () => {
     this.setState({
-      visible: false
+      visible: false,
     });
   };
 
@@ -64,28 +64,31 @@ export default class Gallery extends Component {
     const { pictureList = [] } = this.state;
 
     return (
-      <Fragment>
+      <>
         <NavBar />
         <div id="gallery">
-          {pictureList.map(item => (
+          {pictureList.map((item) => (
             <div key={item.picture_id} onClick={() => this.handleClick(item)}>
               <Card
                 style={{
                   width: 300,
                   height: 320,
-                  margin: 10
+                  margin: 10,
                 }}
                 bordered={false}
               >
                 <img height="290" src={item.thumb_dir} alt={item.total_score} />
-                <p>评分：{item.total_score}</p>
+                <p>
+                  评分：
+                  {item.total_score}
+                </p>
               </Card>
             </div>
           ))}
           <Paginate />
         </div>
         {this.renderModal()}
-      </Fragment>
+      </>
     );
   }
 }

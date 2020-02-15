@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 export default class Login extends Component {
   render() {
     return (
-      <div className="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div className="modal fade" id="login" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div className="modal-dialog" role="document">
           <div className="modal-content">
             <div className="modal-header">
@@ -14,9 +14,14 @@ export default class Login extends Component {
             </div>
             <div className="modal-body">
               <form action="login.php">
-                帐号：<input type="text" name="account" placeholder="邮箱/用户名" /><br />
-                密码：<input type="password" name="password" style={{ margin: '10px 0' }} /><br />
-                验证码：<input type="text" size="6" name="checkCode" />
+                帐号：
+                <input type="text" name="account" placeholder="邮箱/用户名" />
+                <br />
+                密码：
+                <input type="password" name="password" style={{ margin: '10px 0' }} />
+                <br />
+                验证码：
+                <input type="text" size="6" name="checkCode" />
                 <img width="100px" title="点击切换" height="30px" style={{ marginLeft: '20px' }} alt="" />
               </form>
             </div>
@@ -27,6 +32,6 @@ export default class Login extends Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
 }

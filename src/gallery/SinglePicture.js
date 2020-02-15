@@ -1,13 +1,13 @@
-import React, { PureComponent } from "react";
-//import instance from '../instance';
-import Moment from "moment";
-import PropTypes from "prop-types";
-import { Modal, Tag } from "antd";
+import React, { PureComponent } from 'react';
+// import instance from '../instance';
+import Moment from 'moment';
+import PropTypes from 'prop-types';
+import { Modal, Tag } from 'antd';
 
 export default class SinglePicture extends PureComponent {
   static propTypes = {
     picture: PropTypes.object.isRequired,
-    hideModal: PropTypes.func.isRequired
+    hideModal: PropTypes.func.isRequired,
   };
 
   constructor(props) {
@@ -26,21 +26,21 @@ export default class SinglePicture extends PureComponent {
   render() {
     const {
       pic_info,
-      pic_info: {} = {},
+      pic_info: { } = {},
       tags,
-      tags: [] = []
+      tags: [] = [],
     } = this.props.picture;
     return (
       <Modal
         title={
-          "投稿时间：" +
-          Moment(Number(pic_info.create_time + "000")).format("YYYY-MM-DD")
+          `投稿时间：${
+            Moment(Number(`${pic_info.create_time}000`)).format('YYYY-MM-DD')}`
         }
         visible
         onOk={this.handleOk}
         onCancel={this.handleCancel}
       >
-        <p></p>
+        <p />
         <img
           className="card"
           style={{ maxWidth: 1000 }}
@@ -48,10 +48,13 @@ export default class SinglePicture extends PureComponent {
           alt=""
         />
         <div>
-          <h3>分数：{pic_info.total_score}</h3>
+          <h3>
+            分数：
+            {pic_info.total_score}
+          </h3>
         </div>
         <div className="">
-          {tags.map(tag => (
+          {tags.map((tag) => (
             <Tag color="blue">{tag.tag}</Tag>
           ))}
         </div>

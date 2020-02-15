@@ -5,11 +5,11 @@ export default class UploadPicture extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      visible: false
+      visible: false,
     };
   }
 
-  
+
   showModal = () => {
     this.setState({
       visible: true,
@@ -30,7 +30,7 @@ export default class UploadPicture extends Component {
 
   render() {
     return (
-      <Fragment>
+      <>
         <Button
           id="18limit"
           type="danger"
@@ -48,7 +48,7 @@ export default class UploadPicture extends Component {
           <p>Some contents...</p>
           <p>Some contents...</p>
         </Modal>
-      </Fragment>
+      </>
 
     );
   }
