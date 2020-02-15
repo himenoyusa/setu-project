@@ -40,7 +40,7 @@ if ($pic_info == null) {
     redis('set', 'tags'.$pid, $tags);
 }
 
-responce([
+response([
     'pic_info' => $pic_info,
     'tags' => $tags ? $tags : []
 ]);

@@ -4,7 +4,7 @@
  * 返回 json 格式的 http response
  * @param array array 数组形式的数据
  */
-function responce($array) {
+function response($array) {
     header('Content-Type:application/json; charset=UTF-8');
     echo json_encode($array);
 }
@@ -24,7 +24,7 @@ function error($err_code) {
         default:
             $err_info = '404';
     }
-    responce([
+    response([
         'ERR_CODE' => $err_code,
         'ERR_INFO' => $err_info
     ]);
