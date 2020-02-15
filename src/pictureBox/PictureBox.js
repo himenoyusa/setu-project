@@ -1,36 +1,53 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { Carousel } from 'antd';
+import instance from "../instance";
 
-export default function Picturebox() {
-  return (
-    <div id="picturebox" className="carousel slide" data-ride="carousel">
+export default class PictureBox extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      pictures: []
+    };
+  }
 
-      {/* 指示符 */}
-      <ul className="carousel-indicators">
-        <li data-target="#picturebox" data-slide-to="0" className="active"></li>
-        <li data-target="#picturebox" data-slide-to="1"></li>
-        <li data-target="#picturebox" data-slide-to="2"></li>
-      </ul>
+  componentDidMount() {
+    //i为轮播图片数量
+    const pid = [1, 2, 3];
+    for (let i = 1; i <= 3; i++) {
+      instance('api/getpicture.php?pictureid=' + pid[i - 1])
+        .then(response => {
+          this.setState({
+            pictures: [...this.state.pictures, response.data.pic_info]
+          });
+        })
+        .catch(error => {
+          //
+        });
+    }
 
-      {/* 轮播图片 */}
-      <div className="carousel-inner">
-        <div className="carousel-item active">
-          <img src={require("../favicon.png")} data-toggle="modal" data-target="#single" alt="1" />
-        </div>
-        <div className="carousel-item">
-          <img src={require("../404.png")} data-toggle="modal" data-target="#single" alt="2" />
-        </div>
-        <div className="carousel-item">
-          <img src={require("../logo.png")} data-toggle="modal" data-target="#single" alt="2" />
-        </div>
+  }
+
+  render() {
+    const { pictures = {} } = this.state;
+    return (
+      <div id="pictureBox">
+        <Carousel
+          effect="fade"
+          dotPosition="top"
+          autoplay
+          >
+          {pictures.map(picture => (
+            <div key="picture_id">
+              <img
+                src={picture.picture_dir}
+                alt={picture.total_score}
+              />
+            </div>
+          )
+          )}
+        </Carousel>
       </div>
+    );
+  }
 
-      {/* 左右切换按钮 */}
-      <a className="carousel-control-prev" href="#picturebox" data-slide="prev">
-        <span className="carousel-control-prev-icon"></span>
-      </a>
-      <a className="carousel-control-next" href="#picturebox" data-slide="next">
-        <span className="carousel-control-next-icon"></span>
-      </a>
-    </div>
-  );
 }

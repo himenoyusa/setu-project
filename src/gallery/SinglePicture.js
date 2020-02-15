@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 //import instance from '../instance';
 import Moment from 'moment';
 import PropTypes from "prop-types";
+import { Modal, Tag } from 'antd';
 
 export default class SinglePicture extends PureComponent {
 
@@ -12,9 +13,18 @@ export default class SinglePicture extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-
+      
     };
   }
+
+  handleOK = () => {
+    this.props.hideModal();
+  }
+
+  handleCancel = () => {
+    this.props.hideModal();
+  }
+
 
   render() {
     const {
@@ -22,57 +32,28 @@ export default class SinglePicture extends PureComponent {
       tags, tags: [] = []
     } = this.props.picture;
     return (
-      <div
-        className="modal fade"
-        id="single"
-        tabIndex="-1"
-        role="dialog"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
+      <Modal
+        title={'投稿时间：' + Moment(Number(pic_info.create_time + '000')).format('YYYY-MM-DD') }
+        visible={this.props.visible}
+        onOk={this.handleOk}
+        onCancel={this.handleCancel}
       >
-        <div className="modal-dialog modal-lg" role="document">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="exampleModalLabel">
-                投稿时间：{Moment(Number(pic_info.create_time + '000')).format('YYYY-MM-DD')}
-              </h5>
-              <button
-                type="button"
-                className="close"
-                data-dismiss="modal"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div className="modal-body">
-              <img
-                className="card"
-                style={{ maxWidth: 1000 }}
-                src={pic_info.picture_dir}
-                alt=""
-              />
-            </div>
-            <div>
-              <h3>分数：{pic_info.total_score}</h3>
-            </div>
-            <div className="">
-              {tags.map(tag => (
-                <span className="badge badge-primary">{tag.tag}</span>
-              ))}
-            </div>
-            <div className="modal-footer">
-              <button
-                type="button"
-                className="btn btn-danger"
-                data-dismiss="modal"
-              >
-                关闭
-              </button>
-            </div>
-          </div>
+        <p></p>
+        <img
+          className="card"
+          style={{ maxWidth: 1000 }}
+          src={pic_info.picture_dir}
+          alt=""
+        />
+        <div>
+          <h3>分数：{pic_info.total_score}</h3>
         </div>
-      </div>
+        <div className="">
+          {tags.map(tag => (
+            <Tag color="blue">{tag.tag}</Tag>
+          ))}
+        </div>
+      </Modal>
     );
 
   }
