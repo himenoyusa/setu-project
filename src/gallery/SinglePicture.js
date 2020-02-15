@@ -24,29 +24,16 @@ export default class SinglePicture extends PureComponent {
   };
 
   render() {
-    const {
-      pic_info,
-      pic_info: { } = {},
-      tags,
-      tags: [] = [],
-    } = this.props.picture;
+    const { pic_info, pic_info: {} = {}, tags, tags: [] = [] } = this.props.picture;
     return (
       <Modal
-        title={
-          `投稿时间：${
-            Moment(Number(`${pic_info.create_time}000`)).format('YYYY-MM-DD')}`
-        }
+        title={`投稿时间：${Moment(Number(`${pic_info.create_time}000`)).format('YYYY-MM-DD')}`}
         visible
         onOk={this.handleOk}
         onCancel={this.handleCancel}
       >
         <p />
-        <img
-          className="card"
-          style={{ maxWidth: 1000 }}
-          src={pic_info.picture_dir}
-          alt=""
-        />
+        <img className="card" style={{ maxWidth: 1000 }} src={pic_info.picture_dir} alt="" />
         <div>
           <h3>
             分数：

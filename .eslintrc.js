@@ -5,7 +5,8 @@ module.exports = {
         "es6": true
     },
     "extends": [
-        "airbnb"
+        "airbnb",
+        "plugin:prettier/recommended"
     ],
     "globals": {
         "Atomics": "readonly",
