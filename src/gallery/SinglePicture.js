@@ -27,19 +27,15 @@ export default class SinglePicture extends PureComponent {
     const { pic_info, pic_info: {} = {}, tags, tags: [] = [] } = this.props.picture;
     return (
       <Modal
-        title={`投稿时间：${Moment(Number(`${pic_info.create_time}000`)).format('YYYY-MM-DD')}`}
+        title={'投稿时间：' + Moment(Number(pic_info.create_time + '000')).format('YYYY-MM-DD')}
+        footer={null}
+        width={'95vw'}
         visible
         onOk={this.handleOk}
         onCancel={this.handleCancel}
       >
-        <p />
-        <img className="card" style={{ maxWidth: 1000 }} src={pic_info.picture_dir} alt="" />
-        <div>
-          <h3>
-            分数：
-            {pic_info.total_score}
-          </h3>
-        </div>
+        <img className="card" style={{ width: '100%' }} src={pic_info.picture_dir} alt="" />
+        <h3>分数：{pic_info.total_score}</h3>
         <div className="">
           {tags.map((tag) => (
             <Tag color="blue">{tag.tag}</Tag>
