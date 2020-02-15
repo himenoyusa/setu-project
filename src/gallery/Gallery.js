@@ -54,9 +54,7 @@ export default class Gallery extends Component {
     const { visible } = this.state;
 
     if (visible) {
-      return (
-        <SinglePicture picture={currentPicture} hideModal={this.hideModal} />
-      );
+      return <SinglePicture picture={currentPicture} hideModal={this.hideModal} />;
     }
   };
 

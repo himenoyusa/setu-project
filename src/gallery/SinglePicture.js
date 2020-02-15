@@ -5,22 +5,19 @@ import PropTypes from 'prop-types';
 import { Modal, Tag } from 'antd';
 
 export default class SinglePicture extends PureComponent {
-  static propTypes = {
-    picture: PropTypes.object.isRequired,
-    hideModal: PropTypes.func.isRequired,
-  };
-
   constructor(props) {
     super(props);
     this.state = {};
   }
 
   handleOK = () => {
-    this.props.hideModal();
+    const { hideModal } = this.props;
+    hideModal();
   };
 
   handleCancel = () => {
-    this.props.hideModal();
+    const { hideModal } = this.props;
+    hideModal();
   };
 
   render() {
@@ -45,3 +42,8 @@ export default class SinglePicture extends PureComponent {
     );
   }
 }
+
+SinglePicture.propTypes = {
+  picture: PropTypes.object.isRequired,
+  hideModal: PropTypes.func.isRequired,
+};
