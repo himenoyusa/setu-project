@@ -27,14 +27,15 @@ export default class SinglePicture extends PureComponent {
   };
 
   getPictureData = () => {
-    axios('api/getpicture.php?pictureid=' + this.props.pictureId)
+    const { pictureId } = this.props;
+    axios('api/getpicture.php', { params: { pictureid: pictureId } })
       .then((response) => {
         this.setState(() => ({
           loading: false,
           picture: response.data,
         }));
       })
-      .catch((error) => {
+      .catch(() => {
         //
       });
   };
