@@ -14,7 +14,6 @@ export default class Gallery extends Component {
       currentPage: 1,
       visible: false
     };
-    this.handleClick.bind(this);
   }
 
   componentDidMount() {
@@ -44,13 +43,13 @@ export default class Gallery extends Component {
   };
 
   //传递给子组件控制弹窗
-  hideModal() {
+  hideModal = () => {
     this.setState({
       visible: false
     });
-  }
+  };
 
-  renderModal() {
+  renderModal = () => {
     const { currentPicture } = this.state;
     const { visible } = this.state;
 
@@ -59,7 +58,7 @@ export default class Gallery extends Component {
         <SinglePicture picture={currentPicture} hideModal={this.hideModal} />
       );
     }
-  }
+  };
 
   render() {
     const { pictureList = [] } = this.state;
