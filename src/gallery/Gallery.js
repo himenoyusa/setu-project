@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Card } from 'antd';
-import instance from '../instance';
+import instance from '../axios';
 import SinglePicture from './SinglePicture';
 import NavBar from './navBar/NavBar';
 import Paginate from './Paginate';

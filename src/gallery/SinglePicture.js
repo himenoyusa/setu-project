@@ -1,15 +1,10 @@
-import React, { PureComponent, Fragment } from 'react';
-import instance from '../instance';
+import React, { PureComponent } from 'react';
 import Moment from 'moment';
 import PropTypes from 'prop-types';
 import { Modal, Tag, Spin } from 'antd';
+import axios from '../axios';
 
 export default class SinglePicture extends PureComponent {
-  static propTypes = {
-    pictureId: PropTypes.string.isRequired,
-    hideModal: PropTypes.func.isRequired,
-  };
-
   constructor(props) {
     super(props);
     this.state = {
@@ -32,7 +27,7 @@ export default class SinglePicture extends PureComponent {
   };
 
   getPictureData = () => {
-    instance('api/getpicture.php?pictureid=' + this.props.pictureId)
+    axios('api/getpicture.php?pictureid=' + this.props.pictureId)
       .then((response) => {
         this.setState(() => ({
           loading: false,
@@ -46,22 +41,29 @@ export default class SinglePicture extends PureComponent {
 
   render() {
     const { loading } = this.state;
-    if (!loading) {
-      // eslint-disable-next-line no-empty-pattern
-      const { pic_info, pic_info: {} = {}, tags, tags: [] = [] } = this.state.picture;
-      return (
-        <Modal
-          title={`投稿时间：${Moment(Number(`${pic_info.create_time}000`)).format('YYYY-MM-DD')}`}
-          visible
-          onOk={this.handleOk}
-          onCancel={this.handleCancel}
-        >
+    // eslint-disable-next-line no-empty-pattern
+    const { pic_info: { create_time, picture_dir, total_score } = {}, tags = [] } =
+      this.state.picture || {};
+    return (
+      <Modal
+        title={
+          create_time
+            ? `投稿时间：${Moment(Number(`${create_time}000`)).format('YYYY-MM-DD')}`
+            : 'loading'
+        }
+        footer={null}
+        width="95vw"
+        visible
+        onOk={this.handleOk}
+        onCancel={this.handleCancel}
+      >
+        <Spin spinning={loading}>
           <p />
-          <img className="card" style={{ maxWidth: 1000 }} src={pic_info.picture_dir} alt="" />
+          <img className="card" style={{ width: '100%' }} src={picture_dir} alt="" />
           <div>
             <h3>
               分数：
-              {pic_info.total_score}
+              {total_score}
             </h3>
           </div>
           <div className="">
@@ -69,12 +71,7 @@ export default class SinglePicture extends PureComponent {
               <Tag color="blue">{tag.tag}</Tag>
             ))}
           </div>
-        </Modal>
-      );
-    }
-    return (
-      <Modal title="loading" visible onOk={this.handleOk} onCancel={this.handleCancel}>
-        <Spin />
+        </Spin>
       </Modal>
     );
   }
