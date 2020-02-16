@@ -59,8 +59,9 @@ export default class SinglePicture extends PureComponent {
         onCancel={this.handleCancel}
       >
         <Spin spinning={loading}>
-          <p />
-          <img className="card" style={{ width: '100%' }} src={picture_dir} alt="" />
+          <div style={{ textAlign: 'center' }}>
+            <img className="card" style={{ maxWidth: '100%' }} src={picture_dir} alt="" />
+          </div>
           <div>
             <h3>
               分数：
