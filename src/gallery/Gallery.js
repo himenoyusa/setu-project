@@ -1,6 +1,6 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { Card } from 'antd';
-import instance from '../instance';
+import instance from '../axios';
 import SinglePicture from './SinglePicture';
 import NavBar from './navBar/NavBar';
 import Paginate from './Paginate';
@@ -9,7 +9,7 @@ export default class Gallery extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentPicture: {},
+      currentPictureId: -1,
       pictureList: [],
       currentPage: 1,
       visible: false,
@@ -23,23 +23,15 @@ export default class Gallery extends Component {
           pictureList: response.data.thumbs,
         });
       })
-      .catch((error) => {
-        // alert(error);
-      });
+      .catch((error) => {});
   }
 
   // 点击图片时获取图片信息，并通过 props 传递给 single 页面
   handleClick = (item) => {
-    instance(`api/getpicture.php?pictureid=${item.picture_id}`)
-      .then((response) => {
-        this.setState({
-          currentPicture: response.data,
-          visible: true,
-        });
-      })
-      .catch((error) => {
-        //
-      });
+    this.setState({
+      currentPictureId: item.picture_id,
+      visible: true,
+    });
   };
 
   // 传递给子组件控制弹窗
@@ -50,19 +42,15 @@ export default class Gallery extends Component {
   };
 
   renderModal = () => {
-    const { currentPicture } = this.state;
+    const { currentPictureId } = this.state;
     const { visible } = this.state;
-
     if (visible) {
-      return (
-        <SinglePicture picture={currentPicture} hideModal={this.hideModal} />
-      );
+      return <SinglePicture pictureId={currentPictureId} hideModal={this.hideModal} />;
     }
   };
 
   render() {
     const { pictureList = [] } = this.state;
-
     return (
       <>
         <NavBar />

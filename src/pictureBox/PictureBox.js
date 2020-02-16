@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Carousel } from 'antd';
-import instance from '../instance';
+import instance from '../axios';
 
 export default class PictureBox extends Component {
   constructor(props) {
@@ -16,9 +16,9 @@ export default class PictureBox extends Component {
     for (let i = 1; i <= 3; i += 1) {
       instance(`api/getpicture.php?pictureid=${pid[i - 1]}`)
         .then((response) => {
-          this.setState({
-            pictures: [...this.state.pictures, response.data.pic_info],
-          });
+          this.setState((prevState) => ({
+            pictures: [...prevState.pictures, response.data.pic_info],
+          }));
         })
         .catch((error) => {
           //

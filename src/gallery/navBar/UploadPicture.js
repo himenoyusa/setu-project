@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import { Modal, Button } from 'antd';
 
 export default class UploadPicture extends Component {
@@ -8,7 +8,6 @@ export default class UploadPicture extends Component {
       visible: false,
     };
   }
-
 
   showModal = () => {
     this.setState({
@@ -31,11 +30,7 @@ export default class UploadPicture extends Component {
   render() {
     return (
       <>
-        <Button
-          id="18limit"
-          type="danger"
-          onClick={this.showModal}
-        >
+        <Button id="18limit" type="danger" onClick={this.showModal}>
           新色图
         </Button>
         <Modal
@@ -49,7 +44,6 @@ export default class UploadPicture extends Component {
           <p>Some contents...</p>
         </Modal>
       </>
-
     );
   }
 }
