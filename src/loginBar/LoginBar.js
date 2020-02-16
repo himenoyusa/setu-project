@@ -13,19 +13,19 @@ export default class LoginBar extends Component {
     this.setState({
       visible: true,
     });
-  }
+  };
 
   handleOK = () => {
     this.setState({
       visible: false,
     });
-  }
+  };
 
   handleCancel = () => {
     this.setState({
       visible: false,
     });
-  }
+  };
 
   render() {
     return (
