@@ -13,7 +13,7 @@ export default class Gallary extends Component {
   }
 
   componentDidMount() {
-    instance("api/getthumbs.php?page="+this.state.currentPage)
+    instance("api/getthumbs.php?page=" + this.state.currentPage)
       .then(response => {
         this.setState({
           pictureList: response.data.thumbs

@@ -1,23 +1,51 @@
 import React, { PureComponent } from "react";
+import instance from '../instance';
 import PropTypes from "prop-types";
 
 export default class SinglePicture extends PureComponent {
   static propTypes = {
-    picture: PropTypes.object.isRequired
+    pictureid: PropTypes.object.isRequired
   };
+
+  constructor(props)
+  {
+    super(props);
+    this.state = {
+      pictureInfo: [],
+      tags: []
+    }
+  }
+
+  getPicture()
+  {
+    instance('api/getpicture.php?pictureid=' + this.props.pictureid)
+    .then(responce => {
+      this.setState({
+        pictureInfo: responce.data.pic_info,
+        tags: responce.data.tags
+      });
+    })
+    .catch(error => {
+
+    });
+
+  }
 
   //图片读取失败时，显示 404 图片
   renderPicture = () => {
-    const { picture: { picture_dir = "../favicon.png" } = {} } = this.props;
-
+    if (this.state.pictureInfo == []) {
+      return (<img />);
+    } else {
+    
     return (
       <img
         className="card"
         style={{ width: 400, height: 400 }}
-        src={picture_dir}
+        src={ this.state.pictureInfo.picture_dir }
         alt=""
       />
     );
+    }
   };
 
   render() {

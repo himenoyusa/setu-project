@@ -9,6 +9,7 @@
     "axios": "^0.19.2",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
+    "react-aplayer": "^1.0.0",
     "react-axios": "^2.0.3",
     "react-dom": "^16.12.0",
     "react-scripts": "3.3.0"
