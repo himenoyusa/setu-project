@@ -10,6 +10,7 @@ export default class paginate extends Component {
         total={10}
         defaultPageSize={1}
         style={{ padding: 10 }}
+        onChange={() => this.props.changePage}
       />
     );
   }

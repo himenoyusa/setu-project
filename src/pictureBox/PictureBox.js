@@ -32,7 +32,7 @@ export default class PictureBox extends Component {
   handleClick = (picture) => {
     store.dispatch({
       type: 'showModal',
-      data: picture,
+      pictureData: picture,
     });
   };
 

@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
 import Moment from 'moment';
+import { isEmpty } from 'lodash';
 import { Modal, Tag, Spin } from 'antd';
 import store from '../store';
 
@@ -9,23 +10,33 @@ export default class Picture extends PureComponent {
     this.state = {
       loading: true,
       visible: false,
-      picture: {},
+      pictureData: {},
     };
     store.subscribe(this.display);
   }
 
+  // 点击隐藏弹窗
   hideModal = () => {
     store.dispatch({
       type: 'hideModal',
     });
-    this.setState({ visible: false });
+    this.setState({
+      loading: true,
+      visible: false,
+    });
   };
 
+  // store 状态变化时，显示弹窗
   display = () => {
+    // 数据加载完毕后再取消 loading 状态
+    if (!isEmpty(store.getState().pictureData)) {
+      this.setState({
+        loading: false,
+      });
+    }
     this.setState({
-      loading: false,
       visible: true,
-      picture: store.getState().data,
+      pictureData: store.getState().pictureData,
     });
     this.render();
   };
@@ -34,7 +45,7 @@ export default class Picture extends PureComponent {
     const { loading, visible } = this.state;
     // eslint-disable-next-line no-empty-pattern
     const { pic_info: { create_time, picture_dir, total_score } = {}, tags = [] } =
-      this.state.picture || {};
+      this.state.pictureData || {};
     return (
       <Modal
         title={

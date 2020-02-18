@@ -1,17 +1,15 @@
 const defaultState = {
-  visible: false,
-  data: {},
+  pictureData: {},
 };
 
 export default (state = defaultState, action) => {
   const newState = state;
   switch (action.type) {
     case 'showModal':
-      newState.visible = true;
-      newState.data = action.data;
+      newState.pictureData = action.pictureData;
       return newState;
     case 'hideModal':
-      newState.visible = false;
+      newState.pictureData = {};
       return newState;
     default:
   }
