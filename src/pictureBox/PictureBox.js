@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import { Carousel } from 'antd';
 import instance from '../axios';
+import store from '../store';
 
 export default class PictureBox extends Component {
   constructor(props) {
     super(props);
     this.state = {
       pictures: [],
+      visible: store.getState(),
     };
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
@@ -26,13 +29,17 @@ export default class PictureBox extends Component {
     }
   }
 
+  handleClick = () => {
+    store.changeVisibleState(true);
+  };
+
   render() {
     const { pictures = {} } = this.state;
     return (
       <div id="pictureBox">
         <Carousel effect="fade" dotPosition="top" autoplay>
           {pictures.map((picture) => (
-            <div key="picture_id">
+            <div key="picture_id" onClick={this.handleClick(picture.picture_id)}>
               <img src={picture.picture_dir} alt={picture.total_score} />
             </div>
           ))}
