@@ -6,20 +6,20 @@ export default function footer() {
     {
       name: '永遠に咲く花',
       artist: 'AiRI',
-      url: 'musics/music1.mp3',
-      cover: 'musics/cover1.png',
+      url: 'http://www.kanata.moe/musics/music1.mp3',
+      cover: 'http://www.kanata.moe/musics/cover1.png',
     },
     {
       name: '光るなら',
       artist: 'Goose house',
-      url: 'musics/music2.mp3',
-      cover: 'musics/cover2.png',
+      url: 'http://www.kanata.moe/musics/music2.mp3',
+      cover: 'http://www.kanata.moe/musics/cover2.png',
     },
     {
       name: '星の舟',
       artist: 'Lia',
-      url: 'musics/music3.mp3',
-      cover: 'musics/cover3.png',
+      url: 'http://www.kanata.moe/musics/music3.mp3',
+      cover: 'http://www.kanata.moe/musics/cover3.png',
     },
   ];
 

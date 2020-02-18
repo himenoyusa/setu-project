@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Carousel } from 'antd';
 import instance from '../axios';
 import store from '../store';
+import Picture from './Picture';
 
 export default class PictureBox extends Component {
   constructor(props) {
@@ -20,7 +21,7 @@ export default class PictureBox extends Component {
       instance(`api/getpicture.php?pictureid=${pid[i - 1]}`)
         .then((response) => {
           this.setState((prevState) => ({
-            pictures: [...prevState.pictures, response.data.pic_info],
+            pictures: [...prevState.pictures, response.data],
           }));
         })
         .catch((error) => {
@@ -29,21 +30,25 @@ export default class PictureBox extends Component {
     }
   }
 
-  handleClick = () => {
-    store.changeVisibleState(true);
+  handleClick = (picture) => {
+    store.dispatch({
+      type: 'showModal',
+      pictureData: picture,
+    });
   };
 
   render() {
-    const { pictures = {} } = this.state;
+    const { pictures } = this.state;
     return (
       <div id="pictureBox">
         <Carousel effect="fade" dotPosition="top" autoplay>
           {pictures.map((picture) => (
-            <div key="picture_id" onClick={this.handleClick(picture.picture_id)}>
-              <img src={picture.picture_dir} alt={picture.total_score} />
+            <div key="picture_id" onClick={() => this.handleClick(picture)}>
+              <img src={picture.pic_info.picture_dir} alt={picture.pic_info.total_score} />
             </div>
           ))}
         </Carousel>
+        <Picture />
       </div>
     );
   }

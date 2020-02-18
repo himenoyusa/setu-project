@@ -1,14 +1,17 @@
 const defaultState = {
-  inputValue: '123',
-  list: [1, 2],
-  visible: false,
+  pictureData: {},
 };
 
 export default (state = defaultState, action) => {
-  if (action.type === 'changeModalState') {
-    const newState = JSON.parse(JSON.stringify(state));
-    newState.visible = action.value;
-    return newState;
+  const newState = state;
+  switch (action.type) {
+    case 'showModal':
+      newState.pictureData = action.pictureData;
+      return newState;
+    case 'hideModal':
+      newState.pictureData = {};
+      return newState;
+    default:
   }
   return state;
 };
