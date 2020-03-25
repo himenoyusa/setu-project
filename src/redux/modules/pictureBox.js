@@ -3,7 +3,6 @@ import { modalActions } from './message';
 import instance from '../../axios';
 
 const INIT_PICTURE_BOX = 'initPictureBox';
-const DEL_PICTURE_BOX = 'delPictureBox';
 
 const defaultState = fromJS({
   pictureBox: [],
@@ -13,8 +12,6 @@ export default (state = defaultState, action) => {
   switch (action.type) {
     case INIT_PICTURE_BOX:
       return state.set('pictureBox', action.picture);
-    case DEL_PICTURE_BOX:
-      return state.set('pictureBox', []);
     default:
   }
   return state;
@@ -39,7 +36,4 @@ export const pictureBoxActions = {
         });
     };
   },
-  delPictureAction: () => ({
-    type: DEL_PICTURE_BOX,
-  }),
 };

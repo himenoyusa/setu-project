@@ -8,12 +8,9 @@ import { pictureBoxActions } from '../../../redux/modules/pictureBox';
 
 class PictureBox extends Component {
   componentDidMount() {
-    this.props.getPicture();
-  }
-
-  // 路由跳转时清空 picture，防止重复获取
-  componentWillUnmount() {
-    this.props.delPicture();
+    // 用于判断是否为二次加载
+    const firstTime = this.props.pictureBox;
+    this.props.getPicture(firstTime);
   }
 
   render() {
@@ -51,11 +48,11 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(modalActions.getInitModalAction());
       dispatch(modalActions.getShowModalAction(data));
     },
-    getPicture() {
-      dispatch(pictureBoxActions.getPictureAction());
-    },
-    delPicture() {
-      dispatch(pictureBoxActions.delPictureAction());
+    getPicture(isEmpty) {
+      // 如果是第一次加载，则请求 pictureBox
+      if (isEmpty.size === 0) {
+        dispatch(pictureBoxActions.getPictureAction());
+      }
     },
   };
 };

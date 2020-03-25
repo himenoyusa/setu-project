@@ -28,12 +28,12 @@ class Gallery extends Component {
   }
 
   componentDidMount() {
-    // 获取缩略图
+    // 获取缩略图/${this.state.r18}
     this.getThumb();
   }
 
   getThumb = () => {
-    instance(`api/thumbList/${this.state.orderType}/${this.state.currentPage}/${this.state.r18}`)
+    instance(`api/thumbList/${this.state.orderType}/${this.state.currentPage}`)
       .then((response) => {
         this.setState({
           pictureList: response.data.data,

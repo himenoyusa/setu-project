@@ -31,17 +31,19 @@ export const loginActions = {
     return (dispatch) => {
       instance
         .post('api/login', {
-          params: {
-            username: params.username,
-            password: params.password,
-            visaCode: params.visaCode,
-            remember: params.remember,
-          },
+          username: params.username,
+          password: params.password,
+          visaCode: params.visaCode,
+          remember: params.remember,
         })
         .then((response) => {
-          if (response.data.status === true) {
-            cookie.save('userToken', response.data.data[4], { path: '/' });
-            dispatch(loginActions.login(response.data.userInfo));
+          if (response.data.errorCode === 2000) {
+            const { token } = response.data.data;
+            const user = response.data.data;
+            user.token = '';
+            cookie.save('userToken', token, { path: '/' });
+            cookie.save('user', user, { path: '/' });
+            dispatch(loginActions.login(user));
           } else {
             dispatch(modalActions.getShowMsgAction('信息有误，登录失败'));
           }
@@ -63,14 +65,17 @@ export const loginActions = {
         .then((response) => {
           if (response.data.status === true) {
             cookie.remove('userToken', { path: '/' });
+            cookie.remove('user', { path: '/' });
             dispatch(loginActions.logout());
           } else {
             dispatch(modalActions.getShowMsgAction('服务器错误，注销失败'));
             cookie.remove('userToken', { path: '/' });
+            cookie.remove('user', { path: '/' });
           }
         })
         .catch(() => {
           cookie.remove('userToken', { path: '/' });
+          cookie.remove('user', { path: '/' });
           dispatch(modalActions.getShowMsgAction('服务器错误，注销失败'));
         });
     };
