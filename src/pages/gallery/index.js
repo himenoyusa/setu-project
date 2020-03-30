@@ -7,7 +7,7 @@ import NavBar from './navBar/NavBar';
 import Paginate from '../../common/paginate';
 import { GalleryStyle, ContentWrapper, CardWrapper } from './style';
 import { modalActions } from '../../redux/modules/message';
-// import SinglePicture from '../../common/modal/SinglePicture';
+import { thumbListActions } from '../../redux/modules/thumb';
 import MsgBox from '../../common/modal/MsgBox';
 import PictureBox from './pictureBox';
 
@@ -32,17 +32,19 @@ class Gallery extends Component {
     this.getThumb();
   }
 
+  // TODO: ajax 请求重写
   getThumb = () => {
-    instance(`api/thumbList/${this.state.orderType}/${this.state.currentPage}`)
-      .then((response) => {
-        this.setState({
-          pictureList: response.data.data,
-          totalPage: Math.ceil(response.data.data.total / 9),
-        });
-      })
-      .catch(() => {
-        this.props.showMsg('服务器似乎有点故障');
-      });
+    this.props.thumbList(this.state.orderType, this.state.currentPage);
+    // instance(`api/thumbList/${this.state.orderType}/${this.state.currentPage}`)
+    //   .then((response) => {
+    //     this.setState({
+    //       pictureList: response.data.data,
+    //       totalPage: Math.ceil(response.data.data.total / 9),
+    //     });
+    //   })
+    //   .catch(() => {
+    //     this.props.showMsg('服务器似乎有点故障');
+    //   });
   };
 
   // 点击图片时获取图片信息，并通过 store 传递给 picture 弹窗页面
@@ -141,6 +143,9 @@ const mapDispatchToProps = (dispatch) => {
     },
     initModal: () => {
       dispatch(modalActions.getInitModalAction());
+    },
+    thumbList: (orderType, currentPage) => {
+      dispatch(thumbListActions.getThumbListAction(orderType, currentPage));
     },
   };
 };

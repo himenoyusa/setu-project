@@ -30,6 +30,7 @@ export default (state = defaultState, action) => {
 };
 
 export const modalActions = {
+  // TODO: 修改 modal 引用名
   getShowModalAction: (pictureData) => ({
     type: SHOW_MODAL,
     pictureData,
