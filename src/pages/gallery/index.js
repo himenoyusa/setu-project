@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import instance from '../../utils/axios';
 import NavBar from './navBar/NavBar';
-import Paginate from './Paginate';
+import Paginate from '../../common/paginate';
 import { GalleryStyle, ContentWrapper, CardWrapper } from './style';
 import { modalActions } from '../../redux/modules/message';
 // import SinglePicture from '../../common/modal/SinglePicture';
