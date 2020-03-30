@@ -1,6 +1,6 @@
 import { fromJS } from 'immutable';
 import cookie from 'react-cookies';
-import instance from '../../axios';
+import instance from '../../utils/axios';
 import { modalActions } from './message';
 
 const LOGIN = 'login';

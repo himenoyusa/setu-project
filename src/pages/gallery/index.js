@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import APlayer from 'react-aplayer';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import instance from '../../axios';
+import instance from '../../utils/axios';
 import NavBar from './navBar/NavBar';
 import Paginate from './Paginate';
 import { GalleryStyle, ContentWrapper, CardWrapper } from './style';
@@ -84,27 +84,25 @@ class Gallery extends Component {
   render() {
     const { pictureList = [] } = this.state;
     return (
-      <>
-        <GalleryStyle>
-          <PictureBox />
-          <NavBar changeOrder={this.changeOrder} onR={!this.state.r18} changeR={this.changeR} />
-          <APlayer listFolded audio={audio} theme="#be121b" preload="metadata" />
-          <ContentWrapper>
-            {pictureList.map((picture) => (
-              <CardWrapper key={picture.picture_id} onClick={() => this.handleClick(picture)}>
-                <Link to="/picture">
-                  <div className="card">
-                    <img src={picture.thumb_dir} alt="loading" />
-                    <p>{picture.total_score}</p>
-                  </div>
-                </Link>
-              </CardWrapper>
-            ))}
-          </ContentWrapper>
-          <MsgBox />
-          <Paginate total={this.state.totalPage} changePage={this.changePage} />
-        </GalleryStyle>
-      </>
+      <GalleryStyle>
+        <PictureBox />
+        <NavBar changeOrder={this.changeOrder} onR={!this.state.r18} changeR={this.changeR} />
+        <APlayer listFolded audio={audio} theme="#be121b" preload="metadata" />
+        <ContentWrapper>
+          {pictureList.map((picture) => (
+            <CardWrapper key={picture.picture_id} onClick={() => this.handleClick(picture)}>
+              <Link to="/picture">
+                <div className="card">
+                  <img src={picture.thumb_dir} alt="loading" />
+                  <p>{picture.total_score}</p>
+                </div>
+              </Link>
+            </CardWrapper>
+          ))}
+        </ContentWrapper>
+        <MsgBox />
+        <Paginate total={this.state.totalPage} changePage={this.changePage} />
+      </GalleryStyle>
     );
   }
 }

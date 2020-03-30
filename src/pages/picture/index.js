@@ -22,8 +22,7 @@ class Picture extends Component {
   handleScoreTag = () => {};
 
   render() {
-    const { picture_info: { create_time, picture_dir, total_score } = {}, tags = [] } =
-      this.props.pictureData || {};
+    const { create_time, picture_dir, total_score, tags = [] } = this.props.pictureData || {};
     const user = 'yusa';
     return (
       <Content>
@@ -91,7 +90,7 @@ class Picture extends Component {
 const mapStateToProps = (state) => {
   return {
     // state 的 modal 待修正
-    pictureData: state.modal.get('pictureData'),
+    pictureData: state.picture.get('pictureData'),
   };
 };
 const mapDispatchToProps = (dispatch) => {

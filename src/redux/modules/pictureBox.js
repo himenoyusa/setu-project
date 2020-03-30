@@ -1,6 +1,6 @@
 import { fromJS } from 'immutable';
 import { modalActions } from './message';
-import instance from '../../axios';
+import instance from '../../utils/axios';
 
 const INIT_PICTURE_BOX = 'initPictureBox';
 
