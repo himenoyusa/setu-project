@@ -1,23 +1,21 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import APlayer from 'react-aplayer';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import instance from '../../utils/axios';
 import NavBar from './navBar/NavBar';
+import PictureBox from './pictureBox';
 import Paginate from '../../common/paginate';
 import { GalleryStyle, ContentWrapper, CardWrapper } from './style';
 import { modalActions } from '../../redux/modules/message';
 import { thumbListActions } from '../../redux/modules/thumb';
 import MsgBox from '../../common/modal/MsgBox';
-import PictureBox from './pictureBox';
 
-class Gallery extends Component {
+class Gallery extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      pictureList: [],
       currentPage: 1,
-      totalPage: 1,
       orderType: 'default',
       r18: false,
     };
@@ -28,26 +26,15 @@ class Gallery extends Component {
   }
 
   componentDidMount() {
-    // 获取缩略图/${this.state.r18}
+    // 获取缩略图
     this.getThumb();
   }
 
-  // TODO: ajax 请求重写
   getThumb = () => {
     this.props.thumbList(this.state.orderType, this.state.currentPage);
-    // instance(`api/thumbList/${this.state.orderType}/${this.state.currentPage}`)
-    //   .then((response) => {
-    //     this.setState({
-    //       pictureList: response.data.data,
-    //       totalPage: Math.ceil(response.data.data.total / 9),
-    //     });
-    //   })
-    //   .catch(() => {
-    //     this.props.showMsg('服务器似乎有点故障');
-    //   });
   };
 
-  // 点击图片时获取图片信息，并通过 store 传递给 picture 弹窗页面
+  // TODO: 点击图片时获取图片信息，并通过 store 传递给 picture 弹窗页面
   handleClick = (item) => {
     // 预先渲染 picture 页面，loading 状态
     this.props.initModal();
@@ -84,12 +71,13 @@ class Gallery extends Component {
   };
 
   render() {
-    const { pictureList = [] } = this.state;
+    const { pictureList = [] } = this.props;
     return (
       <GalleryStyle>
         <PictureBox />
         <NavBar changeOrder={this.changeOrder} onR={!this.state.r18} changeR={this.changeR} />
         <APlayer listFolded audio={audio} theme="#be121b" preload="metadata" />
+        <Paginate total={this.props.totalPage} changePage={this.changePage} />
         <ContentWrapper>
           {pictureList.map((picture) => (
             <CardWrapper key={picture.picture_id} onClick={() => this.handleClick(picture)}>
@@ -103,7 +91,7 @@ class Gallery extends Component {
           ))}
         </ContentWrapper>
         <MsgBox />
-        <Paginate total={this.state.totalPage} changePage={this.changePage} />
+        <Paginate total={this.props.totalPage} changePage={this.changePage} />
       </GalleryStyle>
     );
   }
@@ -150,4 +138,11 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(Gallery);
+const mapStateToProps = (state) => {
+  return {
+    totalPage: state.thumbList.get('totalPage'),
+    pictureList: state.thumbList.get('thumbList'),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Gallery);

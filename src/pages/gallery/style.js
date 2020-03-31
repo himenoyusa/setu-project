@@ -25,7 +25,7 @@ export const CardWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 24px 12px;
+  margin: 12px 12px;
   background-color: #fff;
 
   & .card {
