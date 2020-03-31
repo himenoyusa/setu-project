@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { Carousel } from 'antd';
 import { Link } from 'react-router-dom';
 import { Box } from './style';
-import { modalActions } from '../../../redux/modules/message';
-import { pictureBoxActions } from '../../../redux/modules/pictureBox';
+import { pictureActions } from '../../../../redux/modules/picture';
+import { pictureBoxActions } from '../../../../redux/modules/pictureBox';
 
 class PictureBox extends Component {
   componentDidMount() {
@@ -45,8 +45,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     handleClick(data) {
-      dispatch(modalActions.getInitModalAction());
-      dispatch(modalActions.getShowModalAction(data));
+      dispatch(pictureActions.getClearPictureAction());
+      dispatch(pictureActions.getShowPictureAction(data));
     },
     getPicture(isEmpty) {
       // 如果是第一次加载，则请求 pictureBox

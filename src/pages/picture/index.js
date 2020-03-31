@@ -3,14 +3,11 @@ import Moment from 'moment';
 import { connect } from 'react-redux';
 import { Tag, Slider, Button } from 'antd';
 import { Content, PictureWrapper, Block } from './style';
-import { pictureActions } from '../../redux/modules/picture';
 
 class Picture extends Component {
   componentDidMount() {
     // 使滚动条回到最顶端
     window.scrollTo(0, 0);
-    // 清除原有的图片
-    this.props.hideModal();
   }
 
   handleDelTag = () => {};
@@ -93,9 +90,5 @@ const mapStateToProps = (state) => {
     pictureData: state.picture.get('pictureData'),
   };
 };
-const mapDispatchToProps = (dispatch) => {
-  return {
-    hideModal: () => dispatch(pictureActions.hideModalAction()),
-  };
-};
-export default connect(mapStateToProps, mapDispatchToProps)(Picture);
+
+export default connect(mapStateToProps, null)(Picture);

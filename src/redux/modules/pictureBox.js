@@ -1,3 +1,6 @@
+/**
+ * 首页跑马灯图片数组
+ */
 import { fromJS } from 'immutable';
 import { modalActions } from './message';
 import instance from '../../utils/axios';

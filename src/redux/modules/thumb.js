@@ -1,3 +1,6 @@
+/**
+ * 首页缩略图数组
+ */
 import { fromJS } from 'immutable';
 import instance from '../../utils/axios';
 import { modalActions } from './message';
@@ -24,11 +27,12 @@ export default (state = defaultState, action) => {
 // 封装 ajax 请求
 const getThumb = async (dispatch, orderType, page, isR = false) => {
   const url = isR ? 'R18thumbList' : 'thumbList';
-  const result = await instance(`api/${url}/${orderType}/${page}`);
-  if (result) {
+  try {
+    const result = await instance(`api/${url}/${orderType}/${page}`);
     return result.data.data;
+  } catch (e) {
+    dispatch(modalActions.getShowMsgAction('服务器故障'));
   }
-  dispatch(modalActions.getShowMsgAction('服务器故障'));
   return false;
 };
 
