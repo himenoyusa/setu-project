@@ -3,8 +3,8 @@
  */
 import { fromJS } from 'immutable';
 import { message } from 'antd';
+import cookie from 'react-cookies';
 import instance from '../../utils/axios';
-// import { modalActions } from './message';
 
 const SHOW_PICTURE = 'showPicture';
 const CLEAR_PICTURE = 'clearPicture';
@@ -40,14 +40,14 @@ export const pictureActions = {
         })
         .catch(() => {
           message.error('服务器故障');
-          // dispatch(modalActions.getShowMsgAction('服务器似乎有点故障'));
         });
     };
   },
-  addScore: (uid = 1, pid = 1, score = 0) => {
+  addScore: (pid = 1, score = 0) => {
     return () => {
+      const { uid } = cookie.load('user');
       instance
-        .post(`api/picture`, {
+        .post(`api/score`, {
           uid,
           pid,
           score,
@@ -56,10 +56,18 @@ export const pictureActions = {
           message.success('评分成功');
         })
         .catch((e) => {
-          if (e.response.data && e.response.data.errorCode === 4003) {
-            message.warning('请先登录');
-          } else {
-            message.error('服务器故障');
+          if (e.response.data) {
+            switch (e.response.data.errorCode) {
+              case 4000:
+                message.warning('评分失败，不能重复评分');
+                break;
+              case 4003:
+                message.warning('请先登录');
+                break;
+              default:
+                message.error('服务器故障');
+                break;
+            }
           }
         });
     };

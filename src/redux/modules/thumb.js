@@ -4,7 +4,6 @@
 import { fromJS } from 'immutable';
 import { message } from 'antd';
 import instance from '../../utils/axios';
-// import { modalActions } from './message';
 
 const INIT_THUMB_LIST = 'InitThumbList';
 
@@ -33,7 +32,6 @@ const getThumb = async (dispatch, orderType, page, isR = false) => {
     return result.data.data;
   } catch (e) {
     message.error('服务器故障');
-    // dispatch(modalActions.getShowMsgAction('服务器故障'));
   }
   return false;
 };

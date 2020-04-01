@@ -9,6 +9,9 @@ import { pictureActions } from '../../redux/modules/picture';
 class Picture extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      newScore: 0,
+    };
     this.deleteTag = this.deleteTag.bind(this);
     this.showTagInput = this.showTagInput.bind(this);
     this.deleteScore = this.deleteScore.bind(this);
@@ -34,10 +37,11 @@ class Picture extends Component {
   // 添加评分
   addScore = () => {
     Modal.confirm({
-      // TODO: 评分功能
+      // TODO: 评分成功后刷新
       content: '确认评分吗？',
       onOk: () => {
-        this.props.addScore();
+        // 评分图片，分值。用户 uid 在 ajax 请求中读取并传递
+        this.props.addScore(this.props.pictureData.picture_id, this.state.newScore);
       },
       onCancel() {
         return null;
@@ -45,9 +49,14 @@ class Picture extends Component {
     });
   };
 
+  // 保存当前评分，为提交评分做准备
+  handleNewScore = (newScore) => {
+    this.setState({ newScore });
+  };
+
   render() {
     const { create_time, picture_dir, total_score, tags = [] } = this.props.pictureData || {};
-    const user = 'yusa';
+    const user = 'yusa'; // TODO: 投稿人
     return (
       <Content>
         <PictureWrapper>
@@ -59,6 +68,7 @@ class Picture extends Component {
             <span className="totalScore">{total_score}</span>
           </div>
           <div className="titleWrapper">
+            {/* TODO: 展示所有评分 */}
             <Tag
               title={user}
               color="red"
@@ -72,7 +82,13 @@ class Picture extends Component {
             </Tag>
           </div>
           <div className="newScore">
-            <Slider className="slider" defaultValue={total_score} />
+            <Slider
+              className="slider"
+              defaultValue={80}
+              onChange={(score) => {
+                this.handleNewScore(score);
+              }}
+            />
             <Button type="danger" onClick={this.addScore}>
               增加评分
             </Button>
@@ -121,15 +137,16 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addScore: () => {
-      // TODO: 发送评分 action
-      dispatch(pictureActions.addScore(1, 80));
+    addScore: (pid, score) => {
+      dispatch(pictureActions.addScore(pid, score));
     },
     deleteScore: () => {
       dispatch();
     },
-    addTag: () => {
-      dispatch();
+    addTag: (pid, tag) => {
+      // TODO: 发送 tag action
+      const { picture_id } = this.props.pictureData;
+      dispatch(pictureActions.addTag(pid, tag));
     },
     deleteTag: () => {
       dispatch();

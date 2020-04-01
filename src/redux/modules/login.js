@@ -2,7 +2,6 @@ import { fromJS } from 'immutable';
 import cookie from 'react-cookies';
 import { message } from 'antd';
 import instance from '../../utils/axios';
-// import { modalActions } from './message';
 
 const LOGIN = 'login';
 const LOGOUT = 'logout';
@@ -47,12 +46,10 @@ export const loginActions = {
             dispatch(loginActions.login(user));
           } else {
             message.error('信息有误，登录失败');
-            // dispatch(modalActions.getShowMsgAction('信息有误，登录失败'));
           }
         })
         .catch(() => {
           message.error('服务器错误');
-          // dispatch(modalActions.getShowMsgAction('服务器错误'));
         });
     };
   },
@@ -72,7 +69,6 @@ export const loginActions = {
             dispatch(loginActions.logout());
           } else {
             message.error('服务器错误，注销失败');
-            // dispatch(modalActions.getShowMsgAction('服务器错误，注销失败'));
             cookie.remove('userToken', { path: '/' });
             cookie.remove('user', { path: '/' });
           }
@@ -81,7 +77,6 @@ export const loginActions = {
           cookie.remove('userToken', { path: '/' });
           cookie.remove('user', { path: '/' });
           message.error('服务器错误，注销失败');
-          // dispatch(modalActions.getShowMsgAction('服务器错误，注销失败'));
         });
     };
   },

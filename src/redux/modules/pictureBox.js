@@ -3,7 +3,6 @@
  */
 import { fromJS } from 'immutable';
 import { message } from 'antd';
-// import { modalActions } from './message';
 import instance from '../../utils/axios';
 
 const INIT_PICTURE_BOX = 'initPictureBox';
@@ -36,8 +35,6 @@ export const pictureBoxActions = {
         })
         .catch(() => {
           message.warning('服务器故障');
-          // const action = modalActions.getShowMsgAction('服务器似乎有点故障');
-          // dispatch(action);
         });
     };
   },
