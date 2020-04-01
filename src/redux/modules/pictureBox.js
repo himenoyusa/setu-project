@@ -2,7 +2,8 @@
  * 首页跑马灯图片数组
  */
 import { fromJS } from 'immutable';
-import { modalActions } from './message';
+import { message } from 'antd';
+// import { modalActions } from './message';
 import instance from '../../utils/axios';
 
 const INIT_PICTURE_BOX = 'initPictureBox';
@@ -34,8 +35,9 @@ export const pictureBoxActions = {
           dispatch(action);
         })
         .catch(() => {
-          const action = modalActions.getShowMsgAction('服务器似乎有点故障');
-          dispatch(action);
+          message.warning('服务器故障');
+          // const action = modalActions.getShowMsgAction('服务器似乎有点故障');
+          // dispatch(action);
         });
     };
   },

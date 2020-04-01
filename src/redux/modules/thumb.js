@@ -2,8 +2,9 @@
  * 首页缩略图数组
  */
 import { fromJS } from 'immutable';
+import { message } from 'antd';
 import instance from '../../utils/axios';
-import { modalActions } from './message';
+// import { modalActions } from './message';
 
 const INIT_THUMB_LIST = 'InitThumbList';
 
@@ -31,7 +32,8 @@ const getThumb = async (dispatch, orderType, page, isR = false) => {
     const result = await instance(`api/${url}/${orderType}/${page}`);
     return result.data.data;
   } catch (e) {
-    dispatch(modalActions.getShowMsgAction('服务器故障'));
+    message.error('服务器故障');
+    // dispatch(modalActions.getShowMsgAction('服务器故障'));
   }
   return false;
 };

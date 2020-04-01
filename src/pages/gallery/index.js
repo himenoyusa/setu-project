@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { PureComponent } from 'react';
 import APlayer from 'react-aplayer';
 import { connect } from 'react-redux';
@@ -8,7 +9,7 @@ import Paginate from '../../common/paginate';
 import { GalleryStyle, ContentWrapper, CardWrapper } from './style';
 import { pictureActions } from '../../redux/modules/picture';
 import { thumbListActions } from '../../redux/modules/thumb';
-import MsgBox from '../../common/modal/MsgBox';
+// import MsgBox from '../../common/modal/MsgBox';
 
 const audio = [
   {
@@ -106,7 +107,7 @@ class Gallery extends PureComponent {
             </CardWrapper>
           ))}
         </ContentWrapper>
-        <MsgBox />
+        {/* <MsgBox /> */}
         <Paginate total={totalPage} changePage={this.changePage} />
       </GalleryStyle>
     );

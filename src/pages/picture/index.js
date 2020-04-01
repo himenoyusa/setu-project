@@ -1,22 +1,49 @@
+/* eslint-disable react/prop-types */
 import React, { Component } from 'react';
 import Moment from 'moment';
 import { connect } from 'react-redux';
-import { Tag, Slider, Button } from 'antd';
+import { Tag, Slider, Button, Modal } from 'antd';
 import { Content, PictureWrapper, Block } from './style';
+import { pictureActions } from '../../redux/modules/picture';
 
 class Picture extends Component {
+  constructor(props) {
+    super(props);
+    this.deleteTag = this.deleteTag.bind(this);
+    this.showTagInput = this.showTagInput.bind(this);
+    this.deleteScore = this.deleteScore.bind(this);
+    this.addScore = this.addScore.bind(this);
+  }
+
   componentDidMount() {
     // 使滚动条回到最顶端
     window.scrollTo(0, 0);
   }
 
-  handleDelTag = () => {};
+  // 删除 tag
+  deleteTag = () => {};
 
+  // 弹出 Modal 增加 tag
   showTagInput = () => {
     return <Button>增加 Tag</Button>;
   };
 
-  handleScoreTag = () => {};
+  // 删除评分
+  deleteScore = () => {};
+
+  // 添加评分
+  addScore = () => {
+    Modal.confirm({
+      // TODO: 评分功能
+      content: '确认评分吗？',
+      onOk: () => {
+        this.props.addScore();
+      },
+      onCancel() {
+        return null;
+      },
+    });
+  };
 
   render() {
     const { create_time, picture_dir, total_score, tags = [] } = this.props.pictureData || {};
@@ -38,7 +65,7 @@ class Picture extends Component {
               closable
               onClose={(e) => {
                 e.preventDefault();
-                this.handleScoreTag();
+                this.deleteScore();
               }}
             >
               80
@@ -46,7 +73,9 @@ class Picture extends Component {
           </div>
           <div className="newScore">
             <Slider className="slider" defaultValue={total_score} />
-            <Button type="danger">增加评分</Button>
+            <Button type="danger" onClick={this.addScore}>
+              增加评分
+            </Button>
           </div>
           <div className="titleWrapper">
             {tags.map((tag) => (
@@ -63,7 +92,7 @@ class Picture extends Component {
                 #{tag.tag}
               </div>
             ))}
-            <Tag onClick={this.showTagInput()} className="site-tag-plus">
+            <Tag onClick={this.showTagInput} className="site-tag-plus">
               + 新标签
             </Tag>
             {this.tagInput}
@@ -86,9 +115,26 @@ class Picture extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    // state 的 modal 待修正
     pictureData: state.picture.get('pictureData'),
   };
 };
 
-export default connect(mapStateToProps, null)(Picture);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addScore: () => {
+      // TODO: 发送评分 action
+      dispatch(pictureActions.addScore(1, 80));
+    },
+    deleteScore: () => {
+      dispatch();
+    },
+    addTag: () => {
+      dispatch();
+    },
+    deleteTag: () => {
+      dispatch();
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Picture);
