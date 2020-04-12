@@ -45,7 +45,7 @@ export const pictureActions = {
   },
   addScore: (pid = 1, score = 0) => {
     return () => {
-      const { uid } = cookie.load('user');
+      const { uid } = cookie.load('user') || 1;
       instance
         .post(`api/score`, {
           uid,

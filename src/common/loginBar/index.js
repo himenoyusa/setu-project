@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import cookie from 'react-cookies';
@@ -5,12 +6,12 @@ import { Button, Modal, Input, Checkbox, Icon, Form } from 'antd';
 import { Link } from 'react-router-dom';
 import { loginActions } from '../../redux/modules/login';
 import { H3, Header } from './style';
-// import Login from './Login';
 
 class Login extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
+      // TODO: 登录弹窗状态保存至 redux
       visible: false,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -45,9 +46,8 @@ class Login extends PureComponent {
     });
   };
 
-  isLogin() {
+  isLogin = () => {
     if (this.props.isLogin) {
-      this.setState({ visible: false });
       return (
         <Button style={{ float: 'right' }} type="danger" onClick={this.props.logout}>
           注销
@@ -59,7 +59,7 @@ class Login extends PureComponent {
         登陆
       </Button>
     );
-  }
+  };
 
   render() {
     const { getFieldDecorator } = this.props.form;

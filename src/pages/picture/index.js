@@ -1,24 +1,17 @@
 /* eslint-disable react/prop-types */
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import Moment from 'moment';
 import { connect } from 'react-redux';
 import { Tag, Slider, Button, Modal } from 'antd';
 import { Content, PictureWrapper, Block } from './style';
 import { pictureActions } from '../../redux/modules/picture';
 
-class Picture extends Component {
+class Picture extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
       newScore: 0,
     };
-    this.deleteTag = this.deleteTag.bind(this);
-    this.showTagInput = this.showTagInput.bind(this);
-    this.deleteScore = this.deleteScore.bind(this);
-    this.addScore = this.addScore.bind(this);
-  }
-
-  componentDidMount() {
     // 使滚动条回到最顶端
     window.scrollTo(0, 0);
   }
@@ -28,7 +21,8 @@ class Picture extends Component {
 
   // 弹出 Modal 增加 tag
   showTagInput = () => {
-    return <Button>增加 Tag</Button>;
+    return null;
+    // return <Button>增加 Tag</Button>;
   };
 
   // 删除评分
@@ -146,7 +140,7 @@ const mapDispatchToProps = (dispatch) => {
     addTag: (pid, tag) => {
       // TODO: 发送 tag action
       const { picture_id } = this.props.pictureData;
-      dispatch(pictureActions.addTag(pid, tag));
+      dispatch(pictureActions.addTag(picture_id, tag));
     },
     deleteTag: () => {
       dispatch();

@@ -9,7 +9,6 @@ import Paginate from '../../common/paginate';
 import { GalleryStyle, ContentWrapper, CardWrapper } from './style';
 import { pictureActions } from '../../redux/modules/picture';
 import { thumbListActions } from '../../redux/modules/thumb';
-// import MsgBox from '../../common/modal/MsgBox';
 
 const audio = [
   {
@@ -40,6 +39,7 @@ class Gallery extends PureComponent {
       orderType: 'default',
       r18: false,
     };
+    this.getThumb = this.getThumb.bind(this);
     this.changeOrder = this.changeOrder.bind(this);
     this.changePage = this.changePage.bind(this);
     this.changeR = this.changeR.bind(this);
@@ -107,7 +107,6 @@ class Gallery extends PureComponent {
             </CardWrapper>
           ))}
         </ContentWrapper>
-        {/* <MsgBox /> */}
         <Paginate total={totalPage} changePage={this.changePage} />
       </GalleryStyle>
     );
