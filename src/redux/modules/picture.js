@@ -59,7 +59,7 @@ export const pictureActions = {
           if (e.response.data) {
             switch (e.response.data.errorCode) {
               case 4000:
-                message.warning('评分失败，不能重复评分');
+                message.warning('请求错误');
                 break;
               case 4003:
                 message.warning('请先登录');

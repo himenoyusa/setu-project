@@ -37,19 +37,27 @@ export const loginActions = {
           remember: params.remember,
         })
         .then((response) => {
-          if (response.data.errorCode === 2000) {
-            const { token } = response.data.data;
-            const user = response.data.data;
-            user.token = '';
-            cookie.save('userToken', token, { path: '/' });
-            cookie.save('user', user, { path: '/' });
-            dispatch(loginActions.login(user));
-          } else {
-            message.error('信息有误，登录失败');
-          }
+          const { token } = response.data.data;
+          const user = response.data.data;
+          user.token = '';
+          cookie.save('userToken', token, { path: '/' });
+          cookie.save('user', user, { path: '/' });
+          dispatch(loginActions.login(user));
         })
-        .catch(() => {
-          message.error('服务器错误');
+        .catch((e) => {
+          if (e.response.data) {
+            switch (e.response.data.errorCode) {
+              case 4000:
+                message.warning('评分失败，不能重复评分');
+                break;
+              case 4003:
+                message.error('信息有误，登录失败');
+                break;
+              default:
+                message.error('服务器故障');
+                break;
+            }
+          }
         });
     };
   },
