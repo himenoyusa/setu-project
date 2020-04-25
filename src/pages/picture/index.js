@@ -59,7 +59,8 @@ class Picture extends PureComponent {
   // ----------------------------------------------
 
   render() {
-    const { create_time, picture_dir, total_score, tags = [] } = this.props.pictureData || {};
+    const { picture, tags = [], scores = [] } = this.props.pictureData || {};
+    const { create_time, picture_dir, total_score } = picture || {};
     const user = 'yusa'; // TODO: 投稿人
     return (
       <Content>
@@ -73,17 +74,19 @@ class Picture extends PureComponent {
           </div>
           <div className="titleWrapper">
             {/* TODO: 展示所有评分 */}
-            <Tag
-              title={user}
-              color="red"
-              closable
-              onClose={(e) => {
-                e.preventDefault();
-                this.deleteScore();
-              }}
-            >
-              80
-            </Tag>
+            {scores.map((score) => (
+              <Tag
+                title={user}
+                color="red"
+                closable
+                onClose={(e) => {
+                  e.preventDefault();
+                  this.deleteScore();
+                }}
+              >
+                {score.score}
+              </Tag>
+            ))}
           </div>
           <div className="newScore">
             <Slider
