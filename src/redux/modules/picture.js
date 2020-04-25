@@ -36,7 +36,16 @@ export const pictureActions = {
     return (dispatch) => {
       instance(`api/picture/${pid}`)
         .then((response) => {
-          dispatch(pictureActions.getShowPictureAction(response.data.data));
+          const picture = response.data.data;
+          // 获取图片所有标签
+          instance(`api/tag/${pid}`)
+            .then((tagResponse) => {
+              picture.tags = tagResponse.data.data;
+            })
+            .catch(() => {
+              message.error('服务器故障');
+            });
+          dispatch(pictureActions.getShowPictureAction(picture));
         })
         .catch(() => {
           message.error('服务器故障');

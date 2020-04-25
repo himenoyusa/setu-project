@@ -5,37 +5,46 @@ import { connect } from 'react-redux';
 import { Tag, Slider, Button, Modal } from 'antd';
 import { Content, PictureWrapper, Block } from './style';
 import { pictureActions } from '../../redux/modules/picture';
+import AddTag from './components/addTag';
 
 class Picture extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
       newScore: 0,
+      addTagModal: false,
     };
     // 使滚动条回到最顶端
     window.scrollTo(0, 0);
   }
 
+  // -------------------------------------------- tag 相关
   // 删除 tag
   deleteTag = () => {};
 
   // 弹出 Modal 增加 tag
-  showTagInput = () => {
-    return null;
-    // return <Button>增加 Tag</Button>;
+  showAddTagModal = () => {
+    this.setState({ addTagModal: true });
   };
 
+  // 隐藏增加 tag 的 modal
+  hideAddTagModal = () => {
+    this.setState({ addTagModal: false });
+  };
+
+  // -------------------------------------------- 评分相关
   // 删除评分
   deleteScore = () => {};
 
   // 添加评分
   addScore = () => {
     Modal.confirm({
-      // TODO: 评分成功后刷新
       content: '确认评分吗？',
       onOk: () => {
         // 评分图片，分值。用户 uid 在 ajax 请求中读取并传递
         this.props.addScore(this.props.pictureData.picture_id, this.state.newScore);
+        // TODO: 评分成功后刷新
+        // this.setState({ newScore: 0 });
       },
       onCancel() {
         return null;
@@ -47,6 +56,7 @@ class Picture extends PureComponent {
   handleNewScore = (newScore) => {
     this.setState({ newScore });
   };
+  // ----------------------------------------------
 
   render() {
     const { create_time, picture_dir, total_score, tags = [] } = this.props.pictureData || {};
@@ -102,10 +112,14 @@ class Picture extends PureComponent {
                 #{tag.tag}
               </div>
             ))}
-            <Tag onClick={this.showTagInput} className="site-tag-plus">
+            <Tag onClick={this.showAddTagModal} className="site-tag-plus">
               + 新标签
             </Tag>
-            {this.tagInput}
+            <AddTag
+              visible={this.state.addTagModal}
+              hideAddTagModal={this.hideAddTagModal}
+              tags={tags}
+            />
           </div>
           <div className="foot">
             <span>
