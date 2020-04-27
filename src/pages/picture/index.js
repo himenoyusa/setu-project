@@ -60,7 +60,7 @@ class Picture extends PureComponent {
 
   render() {
     const { picture, tags = [], scores = [] } = this.props.pictureData || {};
-    const { create_time, picture_dir, total_score } = picture || {};
+    const { create_time, picture_dir, total_score, picture_id } = picture || {};
     const user = 'yusa'; // TODO: 投稿人
     return (
       <Content>
@@ -76,6 +76,7 @@ class Picture extends PureComponent {
             {/* TODO: 展示所有评分 */}
             {scores.map((score) => (
               <Tag
+                key={score.score_id}
                 title={user}
                 color="red"
                 closable
@@ -103,10 +104,10 @@ class Picture extends PureComponent {
           <div className="titleWrapper">
             {tags.map((tag) => (
               <div
+                key={tag.tag_id}
                 className="tagStyle"
                 title={user}
                 color="cyan"
-                closable
                 onClose={(e) => {
                   e.preventDefault();
                   this.handleDelTag();
@@ -122,6 +123,7 @@ class Picture extends PureComponent {
               visible={this.state.addTagModal}
               hideAddTagModal={this.hideAddTagModal}
               tags={tags}
+              pid={picture_id}
             />
           </div>
           <div className="foot">

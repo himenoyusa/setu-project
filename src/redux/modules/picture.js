@@ -43,11 +43,40 @@ export const pictureActions = {
         });
     };
   },
+  addTag: (newTag, pid) => {
+    return () => {
+      const { uid } = cookie.load('user') || 1;
+      instance
+        .post('api/tag', {
+          uid,
+          pid,
+          newTag,
+        })
+        .then(() => {
+          message.success('标签添加成功');
+        })
+        .catch((e) => {
+          if (e.response.data) {
+            switch (e.response.data.errorCode) {
+              case 4000:
+                message.warning('请求错误');
+                break;
+              case 4003:
+                message.warning('请先登录');
+                break;
+              default:
+                message.error('服务器故障');
+                break;
+            }
+          }
+        });
+    };
+  },
   addScore: (pid = 1, score = 0) => {
     return () => {
       const { uid } = cookie.load('user') || 1;
       instance
-        .post(`api/score`, {
+        .post('api/score', {
           uid,
           pid,
           score,
