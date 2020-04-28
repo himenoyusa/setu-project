@@ -18,7 +18,7 @@ class NavBar extends Component {
   };
 
   isLogin = () => {
-    if (this.props.isLogin) {
+    if (!this.props.isLogin) {
       return (
         <>
           <Button type={this.props.onR ? 'danger' : 'primary'} onClick={() => this.change()}>

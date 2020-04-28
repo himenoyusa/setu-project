@@ -73,7 +73,7 @@ class Picture extends PureComponent {
             <span className="totalScore">{total_score}</span>
           </div>
           <div className="titleWrapper">
-            {/* TODO: 展示所有评分 */}
+            {/* 展示所有评分 */}
             {scores.map((score) => (
               <Tag
                 key={score.score_id}
@@ -157,7 +157,7 @@ const mapDispatchToProps = (dispatch) => {
       dispatch();
     },
     addTag: (pid, tag) => {
-      // TODO: 发送 tag action
+      // 发送 tag action
       const { picture_id } = this.props.pictureData;
       dispatch(pictureActions.addTag(picture_id, tag));
     },

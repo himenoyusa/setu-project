@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Upload, Icon, Modal, Button, Checkbox } from 'antd';
+import { Upload, Icon, Modal, Checkbox } from 'antd';
 
 function getBase64(file) {
   return new Promise((resolve, reject) => {
@@ -14,7 +14,6 @@ export default class PictureSelector extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      visaCode: '',
       r18: false,
       previewVisible: false,
       previewImage: '',
@@ -38,6 +37,9 @@ export default class PictureSelector extends Component {
 
   handleChange = ({ fileList }) => this.setState({ fileList });
 
+  // 压缩图片后上传
+  compressPicture = () => {};
+
   // 是否 r18
   handleCheckbox(e) {
     this.setState({
@@ -53,18 +55,20 @@ export default class PictureSelector extends Component {
         <div className="ant-upload-text">Upload</div>
       </div>
     );
-    const { visaCode, r18 } = this.state;
-    const action = 'https://www.kanata.moe/api/uploadPicture.php';
+    const { r18 } = this.state;
+    const action = 'http://localhost:3001/api/picture';
     return (
       <div className="clearfix">
         <Checkbox onChange={this.handleCheckbox}>R18</Checkbox>
 
+        {/* TODO: 重写图片上传逻辑，压缩图片 */}
         <Upload
           action={action}
           accept=".jpg,.png,.gif"
           listType="picture-card"
-          name="picture"
-          data={{ visaCode, r18 }}
+          name="newPicture"
+          data={{ r18 }}
+          beforeUpload={this.compressPicture}
           multiple
           // fileList={fileList}
           // onPreview={this.handlePreview}
@@ -75,18 +79,6 @@ export default class PictureSelector extends Component {
         <Modal visible={previewVisible} footer={null} onCancel={this.handleCancel}>
           <img alt="example" style={{ width: '100%' }} src={previewImage} />
         </Modal>
-        <Upload
-          beforeUpload={this.addVisa}
-          data={{ visaCode, r18 }}
-          name="picture"
-          action={action}
-          directory
-        >
-          <Button>
-            <Icon type="upload" />
-            上传文件夹
-          </Button>
-        </Upload>
       </div>
     );
   }
