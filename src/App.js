@@ -3,14 +3,14 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import 'antd/dist/antd.css';
 import { createGlobalStyle } from 'styled-components';
-import store from './redux/configureStore';
-import Gallery from './pages/gallery';
-import Login from './common/loginBar';
-import Footer from './common/footer';
-import Picture from './pages/picture';
-import Admin from './pages/admin';
-import Profile from './pages/profile';
-import bg from './images/bg2.jpg';
+import store from 'Redux/configureStore';
+import Gallery from 'Pages/gallery';
+import Login from 'Common/loginBar';
+import Footer from 'Common/footer';
+import Picture from 'Pages/picture';
+import Admin from 'Pages/admin';
+import Profile from 'Pages/profile';
+import bg from 'Images/bg2.jpg';
 
 export default function App() {
   return (

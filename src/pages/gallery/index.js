@@ -5,12 +5,10 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import NavBar from './components/navBar';
 import PictureBox from './components/pictureBox';
-import Paginate from '../../common/paginate';
+import Paginate from 'Common/paginate';
 import { GalleryStyle, ContentWrapper, CardWrapper } from './style';
-import { pictureActions } from '../../redux/modules/picture';
-import { thumbListActions } from '../../redux/modules/thumb';
-
-import UploadPicture from './components/upload/UploadPicture';
+import { pictureActions } from 'Redux/modules/picture';
+import { thumbListActions } from 'Redux/modules/thumb';
 
 const audio = [
   {
@@ -110,7 +108,6 @@ class Gallery extends PureComponent {
           ))}
         </ContentWrapper>
         <Paginate total={totalPage} changePage={this.changePage} />
-        <UploadPicture action="http://localhost:3001/api/picture" />
       </GalleryStyle>
     );
   }

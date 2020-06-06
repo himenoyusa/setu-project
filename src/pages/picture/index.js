@@ -4,7 +4,7 @@ import Moment from 'moment';
 import { connect } from 'react-redux';
 import { Tag, Slider, Button, Modal } from 'antd';
 import { Content, PictureWrapper, Block } from './style';
-import { pictureActions } from '../../redux/modules/picture';
+import { pictureActions } from 'Redux/modules/picture';
 import AddTag from './components/addTag';
 
 class Picture extends PureComponent {

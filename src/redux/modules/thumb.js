@@ -3,7 +3,7 @@
  */
 import { fromJS } from 'immutable';
 import { message } from 'antd';
-import instance from '../../utils/axios';
+import instance from 'Utils/axios';
 
 const INIT_THUMB_LIST = 'InitThumbList';
 

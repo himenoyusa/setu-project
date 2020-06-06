@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Modal, Button } from 'antd';
-import PictureSelector from './pictureSelector';
+import UploadPicture from './upload/UploadPicture';
 
-export default class UploadPicture extends Component {
+export default class UploadBox extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -13,12 +13,6 @@ export default class UploadPicture extends Component {
   showModal = () => {
     this.setState({
       visible: true,
-    });
-  };
-
-  handleOk = () => {
-    this.setState({
-      visible: false,
     });
   };
 
@@ -37,10 +31,10 @@ export default class UploadPicture extends Component {
         <Modal
           title="新上传"
           visible={this.state.visible}
-          onOk={this.handleOk}
+          footer={null}
           onCancel={this.handleCancel}
         >
-          <PictureSelector />
+          <UploadPicture action="http://localhost:3001/api/picture" />
         </Modal>
       </>
     );

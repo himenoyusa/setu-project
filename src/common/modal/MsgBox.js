@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { Modal } from 'antd';
 import { connect } from 'react-redux';
-import { modalActions } from '../../redux/modules/message';
+import { modalActions } from 'Redux/modules/message';
 
 class MsgBox extends PureComponent {
   hideModal = () => {

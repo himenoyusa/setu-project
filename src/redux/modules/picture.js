@@ -4,7 +4,7 @@
 import { fromJS } from 'immutable';
 import { message } from 'antd';
 import cookie from 'react-cookies';
-import instance from '../../utils/axios';
+import instance from 'Utils/axios';
 
 const SHOW_PICTURE = 'showPicture';
 const CLEAR_PICTURE = 'clearPicture';

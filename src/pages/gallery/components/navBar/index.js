@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Dropdown, Menu, Icon } from 'antd';
 import { connect } from 'react-redux';
-import UploadPicture from './UploadPicture';
+import UploadBox from './UploadBox';
 import { Bar } from './style';
 
 class NavBar extends Component {
@@ -18,14 +18,14 @@ class NavBar extends Component {
   };
 
   isLogin = () => {
-    if (this.props.isLogin) {
+    if (!this.props.isLogin) {
       return (
         <>
           <Button type={this.props.onR ? 'danger' : 'primary'} onClick={() => this.change()}>
             切换
             {this.props.onR ? 'R18 版' : '普通版'}
           </Button>
-          <UploadPicture />
+          <UploadBox />
         </>
       );
     }

@@ -3,7 +3,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Modal, Tag, Button } from 'antd';
 import { InputBlock, InputWrapper } from './style';
-import { pictureActions } from '../../../../redux/modules/picture';
+import { pictureActions } from 'Redux/modules/picture';
 
 class AddTag extends PureComponent {
   constructor(props) {

@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
-import { Button, Picture } from './style';
-import instance from '../../../../utils/axios';
+import { message } from 'antd';
+import instance from 'Utils/axios';
+import { Button, Picture, Check, Form } from './style';
 import compressPicture from './compressPicture';
 
 class UploadPicture extends PureComponent {
@@ -20,15 +21,20 @@ class UploadPicture extends PureComponent {
   };
 
   handleR18 = (e) => {
-    this.setState({ r18: e.target.value });
+    const r18 = e.target.checked;
+    this.setState({ r18 });
+    return null;
   };
 
-  handleSubmit = () => {
+  handleSubmit = async () => {
+    message.warning('正在上传…');
     const { newPicture, r18 } = this.state;
-    // 获取缩略图
-    const thumb = compressPicture(newPicture) || newPicture;
-    console.log(thumb);
-
+    if (newPicture === null) {
+      message.warning('请先选择图片');
+      return null;
+    }
+    // 获取缩略图，压缩失败则直接使用原图
+    const thumb = (await compressPicture(newPicture)) || newPicture;
     // 发送 ajax 上传
     const forms = new FormData();
     const configs = {
@@ -40,23 +46,32 @@ class UploadPicture extends PureComponent {
 
     instance
       .post(this.props.action, forms, configs)
-      .then()
-      .catch();
+      .then((response) => {
+        if (response.data.errorCode === 2001) {
+          message.success('上传成功');
+        } else {
+          message.error('上传失败，请先登录');
+        }
+      })
+      .catch(() => {
+        message.error('服务器错误，上传失败');
+      });
+    return null;
   };
 
   render() {
     return (
-      <form>
+      <Form>
         <Picture type="file" name="newPicture" onChange={(e) => this.handleSelect(e)} />
-        <span>
+        <Check>
           <input type="checkbox" name="r18" onChange={(e) => this.handleR18(e)} />
           &nbsp;R18
-        </span>
+        </Check>
         <Button type="button" onClick={this.handleSubmit}>
           上传
         </Button>
         <canvas id="canvas" style={{ display: 'none' }}></canvas>
-      </form>
+      </Form>
     );
   }
 }
