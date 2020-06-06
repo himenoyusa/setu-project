@@ -10,24 +10,26 @@ import { GalleryStyle, ContentWrapper, CardWrapper } from './style';
 import { pictureActions } from '../../redux/modules/picture';
 import { thumbListActions } from '../../redux/modules/thumb';
 
+import UploadPicture from './components/upload/UploadPicture';
+
 const audio = [
   {
     name: 'ポケットをふくらませて',
     artist: 'rionos',
-    url: 'https://www.kanata.moe/musics/music2.mp3',
-    cover: 'https://www.kanata.moe/musics/cover2.jpg',
+    url: 'https://kanata.moe/musics/music1.mp3',
+    cover: 'https://kanata.moe/musics/cover1.jpg',
   },
   {
-    name: '永遠に咲く花',
-    artist: 'AiRI',
-    url: 'https://www.kanata.moe/musics/music1.mp3',
-    cover: 'https://www.kanata.moe/musics/cover1.png',
+    name: 'ナグルファルの船上にて',
+    artist: 'monet',
+    url: 'https://kanata.moe/musics/music2.mp3',
+    cover: 'https://kanata.moe/musics/cover2.jpg',
   },
   {
-    name: '星の舟',
-    artist: 'Lia',
-    url: 'https://www.kanata.moe/musics/music3.mp3',
-    cover: 'https://www.kanata.moe/musics/cover3.png',
+    name: '夜の向日葵',
+    artist: '松本文紀',
+    url: 'https://kanata.moe/musics/music3.mp3',
+    cover: 'https://kanata.moe/musics/cover3.png',
   },
 ];
 
@@ -108,6 +110,7 @@ class Gallery extends PureComponent {
           ))}
         </ContentWrapper>
         <Paginate total={totalPage} changePage={this.changePage} />
+        <UploadPicture action="http://localhost:3001/api/picture" />
       </GalleryStyle>
     );
   }

@@ -55,9 +55,14 @@ class Login extends PureComponent {
       );
     }
     return (
-      <Button style={{ float: 'right' }} type="primary" onClick={this.showModal}>
-        登陆
-      </Button>
+      <>
+        <Button style={{ float: 'right' }} type="primary" onClick={this.showModal}>
+          登陆
+        </Button>
+        <Button style={{ float: 'right', marginRight: 10 }} type="default" onClick={this.showModal}>
+          注册
+        </Button>
+      </>
     );
   };
 
@@ -127,7 +132,6 @@ class Login extends PureComponent {
               >
                 登录
               </Button>
-              注册请联系管理员申请
             </Form.Item>
           </Form>
         </Modal>
