@@ -17,6 +17,16 @@ module.exports = {
     sourceType: 'module',
   },
   plugins: ['react'],
+  settings: {
+    'import/resolver': {
+      // node: {
+      //   extensions: ['.js', '.jsx', '.ts', '.tsx'],
+      // },
+      webpack: {
+        config: './config/webpack.config.js',
+      },
+    },
+  },
   rules: {
     'react/jsx-filename-extension': 'off',
     'react/destructuring-assignment': 'off',

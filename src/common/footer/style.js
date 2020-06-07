@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import topBack from 'images/topback.png';
-import logo from 'images/logo.png';
+import topBack from 'src/images/topback.png';
+import logo from 'src/images/logo.png';
 
 export const Footer = styled.footer`
   position: relative;
