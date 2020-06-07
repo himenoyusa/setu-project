@@ -3,9 +3,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Carousel } from 'antd';
 import { Link } from 'react-router-dom';
+import { pictureActions } from 'redux/modules/picture';
+import { pictureBoxActions } from 'redux/modules/pictureBox';
 import { Box } from './style';
-import { pictureActions } from 'Redux/modules/picture';
-import { pictureBoxActions } from 'Redux/modules/pictureBox';
 
 class PictureBox extends Component {
   componentDidMount() {

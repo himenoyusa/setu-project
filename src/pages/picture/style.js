@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import bg from 'Images/bg.jpg';
+import bg from 'images/bg.jpg';
 
 export const Content = styled.div`
   margin: 24px auto 50px;

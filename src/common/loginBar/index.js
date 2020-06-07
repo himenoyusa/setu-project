@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import cookie from 'react-cookies';
 import { Button, Modal, Input, Checkbox, Icon, Form } from 'antd';
 import { Link } from 'react-router-dom';
-import { loginActions } from 'Redux/modules/login';
+import { loginActions } from 'redux/modules/login';
 import { H3, Header } from './style';
 
 class Login extends PureComponent {

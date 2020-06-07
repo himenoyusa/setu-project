@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { message } from 'antd';
-import instance from 'Utils/axios';
+import instance from 'utils/axios';
 import { Button, Picture, Check, Form } from './style';
 import compressPicture from './compressPicture';
 

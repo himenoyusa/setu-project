@@ -5,10 +5,10 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import NavBar from './components/navBar';
 import PictureBox from './components/pictureBox';
-import Paginate from 'Common/paginate';
+import Paginate from 'common/paginate';
 import { GalleryStyle, ContentWrapper, CardWrapper } from './style';
-import { pictureActions } from 'Redux/modules/picture';
-import { thumbListActions } from 'Redux/modules/thumb';
+import { pictureActions } from 'redux/modules/picture';
+import { thumbListActions } from 'redux/modules/thumb';
 
 const audio = [
   {

@@ -3,10 +3,10 @@ import cookie from 'react-cookies';
 
 const token = cookie.load('userToken'); // ? cookie.load('userToken') : '';
 const instance = axios.create({
-  baseURL: 'http://localhost:3001/',
+  baseURL: 'https://img.kanata.moe/',
   timeout: 1000000,
   headers: {
-    // 'X-Requested-With': 'XMLHttpRequest',
+    'X-Requested-With': 'XMLHttpRequest',
     Authorization: `Bearer ${token}`,
   },
 });

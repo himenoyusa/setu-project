@@ -1,7 +1,7 @@
 import { fromJS } from 'immutable';
 import cookie from 'react-cookies';
 import { message } from 'antd';
-import instance from 'Utils/axios';
+import instance from 'utils/axios';
 
 const LOGIN = 'login';
 const LOGOUT = 'logout';
