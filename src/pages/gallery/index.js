@@ -93,7 +93,7 @@ class Gallery extends PureComponent {
     return (
       <GalleryStyle>
         <PictureBox />
-        <NavBar changeOrder={this.changeOrder} onR={!this.state.r18} changeR={this.changeR} />
+        <NavBar changeOrder={this.changeOrder} changeR={this.changeR} />
         <APlayer listFolded audio={audio} theme="#be121b" preload="metadata" />
         <ContentWrapper>
           {pictureList.map((picture) => (

@@ -13,6 +13,7 @@ import Profile from 'Pages/profile';
 import bg from 'Images/bg2.jpg';
 
 export default function App() {
+  // TODO: 图片页路由路径修改
   return (
     <Provider store={store}>
       <GlobalStyle />

@@ -24,14 +24,27 @@ export default (state = defaultState, action) => {
   }
 };
 
-// 封装 ajax 请求
+// 封装 ajax 请求函数
 const getThumb = async (dispatch, orderType, page, isR = false) => {
   const url = isR ? 'R18thumbList' : 'thumbList';
   try {
     const result = await instance(`api/${url}/${orderType}/${page}`);
     return result.data.data;
   } catch (e) {
-    message.error('服务器故障');
+    if (e.response.data) {
+      switch (e.response.data.errorCode) {
+        case 4000:
+          message.warning('请求错误');
+          break;
+        case 4003:
+          message.warning('请先登录');
+          break;
+        default:
+          break;
+      }
+    } else {
+      message.error('服务器故障');
+    }
   }
   return false;
 };

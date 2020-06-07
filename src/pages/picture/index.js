@@ -11,7 +11,7 @@ class Picture extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      newScore: 0,
+      newScore: 80,
       addTagModal: false,
     };
     // 使滚动条回到最顶端
@@ -42,7 +42,7 @@ class Picture extends PureComponent {
       content: '确认评分吗？',
       onOk: () => {
         // 评分图片，分值。用户 uid 在 ajax 请求中读取并传递
-        this.props.addScore(this.props.pictureData.picture_id, this.state.newScore);
+        this.props.addScore(this.props.pictureData.picture.picture_id, this.state.newScore);
         // TODO: 评分成功后刷新
         // this.setState({ newScore: 0 });
       },

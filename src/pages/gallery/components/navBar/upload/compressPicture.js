@@ -38,7 +38,7 @@ async function compressPicture(picture) {
         canvas.height = height * rate;
         ctx.drawImage(this, 0, 0, width * rate, height * rate);
         // 转换成 base64
-        resolve(canvas.toDataURL());
+        resolve(canvas.toDataURL('image/jpeg', 0.7));
         return null;
       };
     });

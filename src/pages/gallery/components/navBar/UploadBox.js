@@ -34,7 +34,7 @@ export default class UploadBox extends Component {
           footer={null}
           onCancel={this.handleCancel}
         >
-          <UploadPicture action="http://localhost:3001/api/picture" />
+          <UploadPicture action="api/picture" />
         </Modal>
       </>
     );
